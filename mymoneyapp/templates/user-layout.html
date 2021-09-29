@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'user-layout.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    {% block style %}
+    {% endblock %}
+    <!-- To do {% block title %}{% endblock %} -->
+    <title>My money</title>
+</head>
+
+<body>
+    <div id="background">
+        <header>
+            <h1>My Money</h1>
+        </header>
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+    </div>
+</body>
+
+</html>

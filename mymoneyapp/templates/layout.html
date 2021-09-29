@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'layout.css' %}" rel="stylesheet">
+    {% block style %}
+    {% endblock %}
+    <!-- To do {% block title %}{% endblock %} -->
+    <title>My Money</title>
+</head>
+
+<body>
+    <header>
+        <div id="header-content">
+            <div id="header-info">
+                <a href="#" id="header-logo">
+                    <img src="{% static 'images/logo.png' %}" alt="My Money App" />
+                </a>
+                <h1>My Money</h1>
+            </div>
+            <div id="header-options">
+                <!-- Todo si el usuario está loggeado (nombre y cerrar sesión) -->
+                <a class="button" href='{% url 'sign-up' %}' id="sign-up">Regístrate</a>
+                <a class="button" href='{% url 'log-in' %}' id="log-in">Iniciar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    {% block body %}
+    {% endblock %}
+
+    <footer>
+        <small>Todos los derechos reservados, 2021.</small>
+    </footer>
+</body>
+
+</html>

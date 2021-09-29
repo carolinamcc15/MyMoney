@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'landing.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main>
+    <div id="slogan">
+        <div>
+            <h2>¡Bienvenido a My Money!</h2>
+            <p>Contamos con las mejores opciones para que lleves el control de tu dinero.</p>
+        </div>
+        <img src="{% static 'images/landing.png' %}" alt="Personas administrando su dinero"/>
+    </div>
+    <h3>¿Qué puedes hacer?</h3>
+    <div id="info-cards">
+        <section class="info-card" id="incomes">
+            <div class="top-card-circle">
+                <img src="{% static 'images/cards/money-bag.png' %}" alt="Bolsa de dinero"/>
+            </div>
+            <p>Registra todos los ingresos que recibes</p>
+        </section>
+        <section class="info-card" id="outcomes">
+            <div class="top-card-circle">
+                <img src="{% static 'images/cards/salary.png' %}" alt="Gastos de dinero"/>
+            </div>
+            <p>Lleva control de todos los gastos que realizas</p>
+        </section>
+        <section class="info-card" id="savings">
+            <div class="top-card-circle">
+                <img src="{% static 'images/cards/piggy-bank.png' %}" alt="Money bag for incomes"/>
+            </div>
+            <p>Motívate a ahorrar sabiendo en qué gastas más</p>
+        </section>
+        <section class="info-card" id="categories">
+            <div class="top-card-circle">
+                <img src="{% static 'images/cards/categories.png' %}" alt="Money bag for incomes"/>
+            </div>
+            <p>Clasifica tus gastos e ingresos por categorías</p>
+        </section>
+    </div>
+</main>
+{% endblock %}

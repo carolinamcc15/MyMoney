@@ -1,0 +1,25 @@
+{% extends 'user-layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'login-sign.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+        <h2>¡Crea una cuenta!</h2>
+        <form id="login" method="POST" name="login" action="">
+            <div class="icon-input">
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Nombre" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Correo electrónico" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Contraseña" required />
+            </div>
+            <button type="submit" form="login">Crear cuenta</button>
+        </form>
+{% endblock %}

@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: rgb(153, 183, 238);
+    --secondary: rgb(8, 2, 92);
+    --background: rgb(255, 253, 247);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+}
+
+* {
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#header-content {
+    display: grid;
+    align-items: center;
+    background-color: var(--primary);
+    grid-template-columns: 8;
+    grid-template-rows: 1;
+    width: 100vw;
+    height: 85px;
+}
+
+#header-info {
+    width: 100%;
+    height: 85px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+#header-options {
+    width: 100%;
+    height: 85px;
+    grid-column-start: 5;
+    grid-column-end: 9;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 2rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: inline;
+    margin: 0;
+    color: #fff;
+}
+
+#header-logo {
+    height: 50px;
+}
+
+#header-logo > img {
+    height: inherit;
+    padding-right: 1rem;
+}
+
+a.button {
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 0.8rem;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+a.button:hover {
+    cursor: pointer;
+}
+
+/* Hovers pendientes (mejor al tener los colores) */
+#sign-up {
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: solid 2px var(--secondary);
+    margin-right: 1.5rem;
+}
+
+#log-in {
+    background-color: var(--secondary);
+    border: solid 2px var(--secondary);
+    color: #fff;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--secondary);
+    width: 100vw;
+    padding: 1.5rem;
+}
+
+small {
+    font-size: 1rem;
+    color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        grid-template-columns: 2;
+        grid-template-rows: 2;
+        position: relative;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #header-info {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        background-color: var(--primary);
+    }
+
+    #header-logo {
+        height: 40px;
+    }
+
+    #header-options {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        margin-top: 1.5rem;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        height: auto;
+        padding-right: 0;
+    }
+
+    #sign-up {
+        background-color: #fff;
+    }
+}

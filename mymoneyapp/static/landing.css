@@ -1,0 +1,132 @@
+h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1rem auto 0 auto;
+}
+
+#slogan {
+    width: 100%;
+    height: 95vh;
+    display: grid;
+    grid-template-columns: 12;
+    grid-template-rows: 1;
+    align-items: center;
+    padding: 1rem 2.5rem 4rem 2.5rem;
+}
+
+#slogan > div {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    padding-right: 2rem;
+}
+
+#slogan > div > h2 {
+    letter-spacing: 0.05rem;
+    font-size: 2.3rem;
+    font-weight: 300;
+}
+
+#slogan > div > p {
+    font-size: 1.3rem;
+}
+
+#slogan > img {
+    grid-column-start: 5;
+    grid-column-end: 13;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#info-cards {
+    width: 100%;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem;
+}
+
+section.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin: 2rem 0 1rem 0;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+section.info-card > p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(-10%);
+    padding: 0 1rem 1rem 1rem;
+}
+
+.top-card-circle {
+    background-color: #fff;
+    border-radius: 100px;
+    width: 125px;
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-35%);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.top-card-circle > img {
+    width: 60%;
+    margin: auto;
+}
+
+#incomes {
+    background-color: rgba(204,121,41,255);
+
+}
+
+#outcomes {
+    background-color: rgba(64,112,147,255);
+}
+
+#savings {
+    background-color: rgba(255,116,137,255);
+}
+
+#categories {
+    background-color: rgba(117,212,164,255);
+}
+
+@media only screen and (max-width: 768px) {
+    #slogan {
+        grid-template-columns: 12;
+        grid-template-rows: 1;
+        height: auto;
+        padding: 4.5rem 2rem 4rem;
+    }
+    
+    #slogan > div {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        padding-bottom: 2rem;
+        padding-right: 0;
+    }
+
+    #slogan > div > h2, p {
+        text-align: center;
+        
+    }
+    
+    #slogan > img {
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #info-cards {
+        grid-template-columns: repeat(1, 1fr);
+        padding: 2rem;
+    }
+}
