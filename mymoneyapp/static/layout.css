@@ -21,7 +21,6 @@ header {
     position: sticky;
     top: 0;
     z-index: 10;
-    width: 100vw;
 }
 
 #header-content {
@@ -30,7 +29,6 @@ header {
     background-color: var(--primary);
     grid-template-columns: 8;
     grid-template-rows: 1;
-    width: 100vw;
     height: 85px;
 }
 
@@ -51,12 +49,13 @@ header {
     grid-column-end: 9;
     display: flex;
     justify-content: flex-end;
+    gap: 1.8rem;
     align-items: center;
-    padding-right: 2rem;
+    padding-right: 3rem;
 }
 
 h1 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 600;
     display: inline;
     margin: 0;
@@ -90,7 +89,6 @@ a.button:hover {
     background-color: var(--primary);
     color: var(--secondary);
     border: solid 2px var(--secondary);
-    margin-right: 1.5rem;
 }
 
 #log-in {
@@ -103,7 +101,6 @@ footer {
     display: flex;
     justify-content: flex-end;
     background-color: var(--secondary);
-    width: 100vw;
     padding: 1.5rem;
 }
 

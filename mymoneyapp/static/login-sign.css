@@ -41,7 +41,7 @@ button {
     margin-top: 1rem;
     border: none;
     border-radius: 15px;
-    font-size: 1;
+    font-size: 1rem;
     background-color: var(--secondary);
     color: #fff;
     font-weight: 600;
@@ -57,10 +57,11 @@ button:hover {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
     button {
         padding: 0.6rem 1rem;
         border-radius: 10px;
+        font-size: 0.8rem;
     }
 
     div.icon-input i {
