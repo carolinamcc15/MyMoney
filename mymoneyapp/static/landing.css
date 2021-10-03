@@ -5,8 +5,14 @@ h3 {
     margin: 1rem auto 0 auto;
 }
 
+main {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
 #slogan {
-    width: 100%;
+    width: 95%;
     height: 95vh;
     display: grid;
     grid-template-columns: 12;
@@ -39,7 +45,7 @@ h3 {
 }
 
 #info-cards {
-    width: 100%;
+    width: 9%;
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(2, 1fr);

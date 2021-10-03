@@ -1,9 +1,10 @@
 h2 {
     margin: 0 auto 2rem;
+    text-align: center;
 }
 
 form {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +37,7 @@ input:focus {
 }
 
 button {
-    padding: 1rem 3rem;
+    padding: 0.8rem 2rem;
     margin-top: 1rem;
     border: none;
     border-radius: 15px;
@@ -53,5 +54,17 @@ button:hover {
 @media only screen and (max-width: 768px) {
     h2 {
         font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    button {
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+    }
+
+    div.icon-input i {
+        margin-right: 0.5rem;
+        font-size: 1rem;
     }
 }
