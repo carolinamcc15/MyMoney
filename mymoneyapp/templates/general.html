@@ -29,27 +29,27 @@
         <div id="overview-container">
             <div id="general-info">
                 <div id="total">
-                    <h3>Total de todas las cuentas</h3>
+                    <h3>Total</h3>
                     <p>$350.99</p>
                 </div>
                 <div id="top-categories">
-                    <h3>Categorías con más gastos</h3>
+                    <h3>Gastos principales</h3>
                     <div id="categories-container">
                         <div class="category">
-                            <div class="catogory-rounded">
-                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            <div class="catogory-img">
+                                <img class="large-icon" src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
                             </div>
                             <p class="sm-title">Efectivo</p>
                         </div>
                         <div class="category">
-                            <div class="catogory-rounded">
-                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            <div class="catogory-img">
+                                <img class="large-icon" src="{% static 'images/categories/magic.png' %}" alt="Dinero" />
                             </div>
                             <p class="sm-title">Efectivo</p>
                         </div>
                         <div class="category">
-                            <div class="catogory-rounded">
-                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            <div class="catogory-img">
+                                <img class="large-icon" src="{% static 'images/categories/car.png' %}" alt="Dinero" />
                             </div>
                             <p class="sm-title">Efectivo</p>
                         </div>
@@ -65,44 +65,38 @@
         <h2>Registros recientes</h2>
         <div id="recent-records">
             <div class="record-card">
-                <div>
-                    <div class="catogory-rounded-sm">
-                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
-                    </div>
-                </div>  
-                <div class="category-account">
+                <div class="record-img">
+                    <img src="{% static 'images/categories/presents.png' %}" alt="Dinero" />
+                </div>
+                <div class="category-record">
                     <p>Comestibles</p>
                 </div>
                 <div class="quant-date">
-                    <p class="minus">-$10</p>
+                    <p class="minus">$10</p>
+                    <p class="date">31/10/2021</p>
+                </div>
+            </div>
+            <div class="record-card">
+                <div class="record-img">
+                    <img src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
+                </div>
+                <div class="category-record">
+                    <p>Comestibles</p>
+                </div>
+                <div class="quant-date">
+                    <p class="plus">$10</p>
                     <p>31/10/2021</p>
                 </div>
             </div>
             <div class="record-card">
-                <div>
-                    <div class="catogory-rounded-sm">
-                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
-                    </div>
-                </div>  
-                <div class="category-account">
+                <div class="record-img">
+                    <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
+                </div>
+                <div class="category-record">
                     <p>Comestibles</p>
                 </div>
                 <div class="quant-date">
-                    <p class="minus">-$10</p>
-                    <p>31/10/2021</p>
-                </div>
-            </div>
-            <div class="record-card">
-                <div>
-                    <div class="catogory-rounded-sm">
-                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
-                    </div>
-                </div>  
-                <div class="category-account">
-                    <p>Comestibles</p>
-                </div>
-                <div class="quant-date">
-                    <p class="minus">-$10</p>
+                    <p class="minus">$10</p>
                     <p>31/10/2021</p>
                 </div>
             </div>
