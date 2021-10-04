@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'general.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main>
+    <section id="accounts">
+        <h2>Mis cuentas</h2>
+        <div id="accounts-scroll">
+            <!-- Agregarlas mediante un for -->
+            <div class="account-card cash">
+                <!-- Renderizar condicionalmente los íconos -->
+                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                <p class="card-title">Efectivo
+                    <span>$350.99</span>
+                </p>
+            </div>
+            <div id="add-account">
+                <i class="fas fa-plus"></i>
+                <p class="card-title">Añadir cuenta</p>
+            </div>
+        </div>
+    </section>
+    <section id="overview">
+        <h2>Informe general</h2>
+        <div id="overview-container">
+            <div id="general-info">
+                <div id="total">
+                    <h3>Total de todas las cuentas</h3>
+                    <p>$350.99</p>
+                </div>
+                <div id="top-categories">
+                    <h3>Categorías con más gastos</h3>
+                    <div id="categories-container">
+                        <div class="category">
+                            <div class="catogory-rounded">
+                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            </div>
+                            <p class="sm-title">Efectivo</p>
+                        </div>
+                        <div class="category">
+                            <div class="catogory-rounded">
+                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            </div>
+                            <p class="sm-title">Efectivo</p>
+                        </div>
+                        <div class="category">
+                            <div class="catogory-rounded">
+                                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                            </div>
+                            <p class="sm-title">Efectivo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="money-chart">
+
+            </div>
+        </div>
+    </section>
+    <section id="accounts">
+        <h2>Registros recientes</h2>
+        <div id="recent-records">
+            <div class="record-card">
+                <div>
+                    <div class="catogory-rounded-sm">
+                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                    </div>
+                </div>  
+                <div class="category-account">
+                    <p>Comestibles</p>
+                </div>
+                <div class="quant-date">
+                    <p class="minus">-$10</p>
+                    <p>31/10/2021</p>
+                </div>
+            </div>
+            <div class="record-card">
+                <div>
+                    <div class="catogory-rounded-sm">
+                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                    </div>
+                </div>  
+                <div class="category-account">
+                    <p>Comestibles</p>
+                </div>
+                <div class="quant-date">
+                    <p class="minus">-$10</p>
+                    <p>31/10/2021</p>
+                </div>
+            </div>
+            <div class="record-card">
+                <div>
+                    <div class="catogory-rounded-sm">
+                        <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                    </div>
+                </div>  
+                <div class="category-account">
+                    <p>Comestibles</p>
+                </div>
+                <div class="quant-date">
+                    <p class="minus">-$10</p>
+                    <p>31/10/2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="floating-button">
+        <i class="fas fa-plus"></i>
+    </div>
+</main>
+
+{% endblock %}
