@@ -118,7 +118,7 @@ p.card-title > span {
 }
 
 div.account-card > img {
-    width: 38%;
+    width: 52px;
     margin-bottom: 0.3rem;
 }
 
@@ -390,5 +390,10 @@ div#floating-button .fa-plus{
 
     div.record-img img {
         width: 50px;
+    }
+
+    div.account-card > img {
+        width: 43px;
+        margin-bottom: 0.3rem;
     }
 }

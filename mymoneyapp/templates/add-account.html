@@ -7,7 +7,7 @@
 
 {% block body %}
 <main>
-    <h2>Nuevo registro</h2>
+    <h2>Nueva cuenta</h2>
     <section>
         <img src="{% static 'images/account/add-account.svg' %}" alt="Nueva cuenta de dinero" />
         <form id="add-account" method="POST" name="add-account" action="">
@@ -16,11 +16,11 @@
                 <input type="text" name="account-name" placeholder="Nombre" required />
             </div>
             <div class="icon-input">
-                <i class="fas fa-money-bill-wave-alt"></i>
+                <i class="fas fa-dollar-sign"></i>
                 <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00" required />
             </div>
             <div class="icon-input">
-                <i class="fas fa-donate"></i>
+                <i class="fas fa-list"></i>
                 <select name="account-type" id="account-type" required>
                     <option>General</option>
                     <option>Efectivo</option>
