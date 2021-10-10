@@ -1,0 +1,112 @@
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+}
+
+h2 {
+    width: 100%;
+    margin: 0 auto 2rem;
+    border-bottom: 1px gray solid;
+    padding-bottom: 1rem;
+}
+
+section {
+    display: flex;
+}
+
+section > img {
+    width: 43rem;
+    min-width: 22rem;
+    margin-left: 1rem;
+}
+
+form {
+    width: 100%;
+    margin-top: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.icon-input {
+    display: flex;
+    width: 100%;
+    max-width: 650px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+div.icon-input i {
+    margin-right: 0.8rem;
+    font-size: 1.3rem;
+    color: var(--secondary)
+}
+
+input, select {
+    width: 90%;
+    padding: 0.8rem;
+    border: none;
+    background-color: transparent;
+    border-bottom: solid gray 1px;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    padding: 0.8rem 2rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    background-color: var(--secondary);
+    color: #fff;
+    font-weight: 600;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+footer {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    main {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    section > img {
+        display: none;
+    }
+
+    input, select {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    button {
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+    }
+
+    div.icon-input i {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+}

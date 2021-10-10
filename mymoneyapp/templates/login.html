@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block style %}
-    <link href="{% static 'login-sign.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login-sign.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
         <h2>Inicio de sesión</h2>
         <form id="login" method="POST" name="login" action="">
             <div class="icon-input">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Correo electrónico" required/>
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Usuario" required/>
             </div>
             <div class="icon-input">
                 <i class="fas fa-lock"></i>

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/account-record.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main>
+    <h2>Nuevo registro</h2>
+    <section>
+        <img src="{% static 'images/account/add-account.svg' %}" alt="Nueva cuenta de dinero" />
+        <form id="add-account" method="POST" name="add-account" action="">
+            <div class="icon-input">
+                <i class="fas fa-font"></i>
+                <input type="text" name="account-name" placeholder="Nombre" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-money-bill-wave-alt"></i>
+                <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-donate"></i>
+                <select name="account-type" id="account-type" required>
+                    <option>General</option>
+                    <option>Efectivo</option>
+                    <!-- {% for category in categories %}
+                <option> {{ category.category }} </option>
+                {% endfor %} -->
+                </select>
+            </div>
+            <button type="submit" form="add-account">Crear cuenta</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

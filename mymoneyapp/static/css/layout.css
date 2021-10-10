@@ -101,7 +101,7 @@ footer {
     display: flex;
     justify-content: flex-end;
     background-color: var(--secondary);
-    padding: 1.5rem;
+    padding: 1.3rem;
 }
 
 small {

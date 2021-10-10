@@ -43,31 +43,61 @@ div.account-card, div#add-account {
     align-items: center;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    transition: ease-in-out 0.2s;
     padding: 1.5rem;
-    /* Anaranjado
-    background-color: #FBAB7E;
-    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%); */
+    transition: ease-in-out 0.2s;
+}
+
+div.account-card:hover, div#add-account:hover, 
+div#floating-button:hover, div.record-card:hover {
+    cursor: pointer;
+    transform: scale(1.007);
+    transition: all ease-in-out 0.2s;
 }
 
 div.cash {
-    background-color: #0093E9;
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    background-image: linear-gradient( 135deg, #79F1A4 10%, #196bc4 100%);
+}
+
+div.cash:hover {
+    background-image: linear-gradient( 135deg, #63db8f 10%, #0E5CAD 100%);
+}
+
+div.savings {
+    background-image: linear-gradient( 135deg, #F761A1 10%, #8C1BAB 100%);
+}
+
+div.savings:hover {
+    background-image: linear-gradient( 135deg, #dd538f 10%, #8818a7 100%);
+}
+
+div.general {
+    background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);
+}
+
+div.general:hover {
+    background-image: linear-gradient( 135deg, #30b0e2 10%, #870eb3 100%);
+}
+
+div.bank-card {
+    background-image: linear-gradient( 135deg, #FF9D6C 10%, #BB4E75 100%);
+}
+
+div.bank-card:hover {
+    background-image: linear-gradient( 135deg, #eb8856 10%, #b1486d 100%);
 }
 
 div#add-account {
     background-image: linear-gradient(45deg, #bababa 0%, #d6d6d6 52%, #e0dede 100%);
 }
 
+div#add-account:hover {
+    background-image: linear-gradient(25deg, #a8a8a8 0%, #c0c0c0 52%, #dadada 100%);
+}
+
 div#add-account .fa-plus {
     color: #fff;
     font-size: 3.5rem;
     margin-bottom: 1rem;
-}
-
-div.account-card:hover, div#add-account:hover, div#floating-button:hover {
-    cursor: pointer;
-    transform: scale(1.02);
 }
 
 p.card-title {
@@ -88,7 +118,7 @@ p.card-title > span {
 }
 
 div.account-card > img {
-    width: 30%;
+    width: 38%;
     margin-bottom: 0.3rem;
 }
 
@@ -169,19 +199,6 @@ div.category-img {
 img.large-icon {
     width: 80px;
 }
-/* div.catogory-rounded {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    background-color: cornflowerblue;
-    border-radius: 100px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
-div.catogory-rounded img {
-    width: 60px;
-} */
 
 p.sm-title {
     color: #000;
@@ -201,6 +218,11 @@ div.record-card {
     padding: 1rem;
     background-color: #fff;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: ease-in-out 0.2s;
+}
+
+div.record-card:hover {
+    transform: scale(1.005);
 }
 
 div.record-img {
@@ -266,6 +288,11 @@ div#floating-button {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+div#floating-button:hover {
+    background-color: rgb(71, 175, 71);;
+}
+
+
 div#floating-button .fa-plus{
     color: #fff;
     font-size: 3rem;
@@ -290,6 +317,16 @@ div#floating-button .fa-plus{
         font-size: 1.5rem;
     }
 
+    p.card-title {
+        font-size: 1rem;
+    }
+    
+    p.card-title > span {
+        font-size: 1.5rem;
+        margin-top: 0.6rem;
+        font-weight: 600;
+    }
+
     img.large-icon {
         width: 55px;
     }
@@ -306,7 +343,6 @@ div#floating-button .fa-plus{
         grid-column-start: 1;
         grid-column-end: 2;
     }
-    /* Reocordar utilizar clases para cada tipo de gradient */
     
     div#money-chart {
         grid-column-start: 1;
@@ -331,6 +367,16 @@ div#floating-button .fa-plus{
         font-size: 1rem;
     }
 
+    p.card-title {
+        font-size: 0.8rem;
+    }
+    
+    p.card-title > span {
+        font-size: 1.3rem;
+        margin-top: 0.5rem;
+        font-weight: 500;
+    }
+    
     p.sm-title {
         color: #000;
         text-transform: uppercase;

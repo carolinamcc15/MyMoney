@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block style %}
-<link href="{% static 'general.css' %}" rel="stylesheet">
+<link href="{% static 'css/general.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -13,8 +13,29 @@
             <!-- Agregarlas mediante un for -->
             <div class="account-card cash">
                 <!-- Renderizar condicionalmente los íconos -->
-                <img src="{% static 'images/account/wallet.png' %}" alt="Dinero" />
+                <img src="{% static 'images/account/money-bag.png' %}" alt="Dinero" />
                 <p class="card-title">Efectivo
+                    <span>$350.99</span>
+                </p>
+            </div>
+            <div class="account-card general">
+                <!-- Renderizar condicionalmente los íconos -->
+                <img src="{% static 'images/account/general.png' %}" alt="Dinero" />
+                <p class="card-title">General
+                    <span>$350.99</span>
+                </p>
+            </div>
+            <div class="account-card savings">
+                <!-- Renderizar condicionalmente los íconos -->
+                <img src="{% static 'images/account/savings.png' %}" alt="Dinero" />
+                <p class="card-title">Ahorros
+                    <span>$350.99</span>
+                </p>
+            </div>
+            <div class="account-card bank-card">
+                <!-- Renderizar condicionalmente los íconos -->
+                <img src="{% static 'images/account/credit-card.png' %}" alt="Dinero" />
+                <p class="card-title">Tarjeta
                     <span>$350.99</span>
                 </p>
             </div>
