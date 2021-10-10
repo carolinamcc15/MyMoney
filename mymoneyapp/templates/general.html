@@ -10,39 +10,38 @@
     <section id="accounts">
         <h2>Mis cuentas</h2>
         <div id="accounts-scroll">
-            <!-- Agregarlas mediante un for -->
-            <div class="account-card cash">
-                <!-- Renderizar condicionalmente los íconos -->
-                <img src="{% static 'images/account/money-bag.png' %}" alt="Dinero" />
-                <p class="card-title">Efectivo
-                    <span>$350.99</span>
-                </p>
-            </div>
-            <div class="account-card general">
-                <!-- Renderizar condicionalmente los íconos -->
+            <a href="{% url 'account' %}">
+                <div class="account-card cash">
+                    <img src="{% static 'images/account/money-bag.png' %}" alt="Dinero" />
+                    <p class="card-title">Efectivo
+                        <span>$350.99</span>
+                    </p>
+                </div>
+            </a>
+            <!-- <div class="account-card general">
                 <img src="{% static 'images/account/general.png' %}" alt="Dinero" />
                 <p class="card-title">General
                     <span>$350.99</span>
                 </p>
             </div>
             <div class="account-card savings">
-                <!-- Renderizar condicionalmente los íconos -->
                 <img src="{% static 'images/account/savings.png' %}" alt="Dinero" />
                 <p class="card-title">Ahorros
                     <span>$350.99</span>
                 </p>
             </div>
             <div class="account-card bank-card">
-                <!-- Renderizar condicionalmente los íconos -->
                 <img src="{% static 'images/account/credit-card.png' %}" alt="Dinero" />
                 <p class="card-title">Tarjeta
                     <span>$350.99</span>
                 </p>
-            </div>
-            <div id="add-account">
-                <i class="fas fa-plus"></i>
-                <p class="card-title">Añadir cuenta</p>
-            </div>
+            </div> -->
+            <a href="{% url 'add-account' %}">
+                <div id="add-account">
+                    <i class="fas fa-plus"></i>
+                    <p class="card-title">Añadir cuenta</p>
+                </div>
+            </a>
         </div>
     </section>
     <section id="overview">
@@ -58,7 +57,8 @@
                     <div id="categories-container">
                         <div class="category">
                             <div class="catogory-img">
-                                <img class="large-icon" src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
+                                <img class="large-icon" src="{% static 'images/categories/fast-food.png' %}"
+                                    alt="Dinero" />
                             </div>
                             <p class="sm-title">Efectivo</p>
                         </div>
@@ -82,21 +82,23 @@
             </div>
         </div>
     </section>
-    <section id="accounts">
+    <section id="recent">
         <h2>Registros recientes</h2>
         <div id="recent-records">
-            <div class="record-card">
-                <div class="record-img">
-                    <img src="{% static 'images/categories/presents.png' %}" alt="Dinero" />
+            <a href="{% url 'edit-record' %}">
+                <div class="record-card">
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/presents.png' %}" alt="Dinero" />
+                    </div>
+                    <div class="category-record">
+                        <p>Comestibles</p>
+                    </div>
+                    <div class="quant-date">
+                        <p class="minus">$10</p>
+                        <p class="date">31/10/2021</p>
+                    </div>
                 </div>
-                <div class="category-record">
-                    <p>Comestibles</p>
-                </div>
-                <div class="quant-date">
-                    <p class="minus">$10</p>
-                    <p class="date">31/10/2021</p>
-                </div>
-            </div>
+            </a>
             <div class="record-card">
                 <div class="record-img">
                     <img src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
@@ -123,9 +125,11 @@
             </div>
         </div>
     </section>
-    <div id="floating-button">
-        <i class="fas fa-plus"></i>
-    </div>
+    <a href="{% url 'add-record' %}">
+        <div id="floating-button">
+            <i class="fas fa-plus"></i>
+        </div>
+    </a>
 </main>
 
 {% endblock %}

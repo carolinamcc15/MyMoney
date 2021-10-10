@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/account-record.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main>
+    <h2>Editar registro</h2>
+    <section>
+        <img src="{% static 'images/add-record.svg' %}" alt="Nueva cuenta de dinero" />
+        <form id="edit-record" method="POST" name="add-record" action="">
+            <div class="icon-input toggle">
+                <input type="radio" id="expense" name="is-income" checked="checked" required />
+                <label for="expense">Gasto</label>
+                <input type="radio" id="income" name="is-income" required />
+                <label for="income">Ingreso</label>
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-dollar-sign"></i>
+                <input type="number" name="quantity" placeholder="Cantidad ($)" step="0.01" min="0.00" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-list"></i>
+                <select name="account" id="account" required>
+                    <option>Mi cuenta</option>
+                    <option>Dinero</option>
+                    <!-- {% for category in categories %}
+                <option> {{ category.category }} </option>
+                {% endfor %} -->
+                </select>
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-utensils"></i>
+                <select name="category" id="category" required>
+                    <option>Comida y bebida</option>
+                    <option>Regalos</option>
+                    <!-- {% for category in categories %}
+                <option> {{ category.category }} </option>
+                {% endfor %} -->
+                </select>
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-font"></i>
+                <input type="text" name="description" placeholder="Descripción" />
+            </div>
+            <button type="submit" form="edit-record">Guardar</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/account.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main>
+    <h2>Nombre de la cuenta</h2>
+    <div>
+        <section>
+            <form id="edit-account" method="POST" name="add-account" action="">
+                <div class="icon-input">
+                    <i class="fas fa-font"></i>
+                    <input type="text" name="account-name" placeholder="Nombre" required />
+                </div>
+                <div class="icon-input">
+                    <i class="fas fa-dollar-sign"></i>
+                    <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00"
+                        required />
+                </div>
+                <div class="icon-input">
+                    <i class="fas fa-list"></i>
+                    <select name="account-type" id="account-type" required>
+                        <option>General</option>
+                        <option>Efectivo</option>
+                        <!-- {% for category in categories %}
+                <option> {{ category.category }} </option>
+                {% endfor %} -->
+                    </select>
+                </div>
+                <button type="submit" form="edit-account">Guardar</button>
+            </form>
+        </section>
+
+        <section id="recent">
+            <div id="recent-records">
+                <a href="{% url 'edit-record' %}">
+                    <div class="record-card">
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/presents.png' %}" alt="Dinero" />
+                        </div>
+                        <div class="category-record">
+                            <p>Comestibles</p>
+                        </div>
+                        <div class="quant-date">
+                            <p class="minus">$10</p>
+                            <p class="date">31/10/2021</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="record-card">
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
+                    </div>
+                    <div class="category-record">
+                        <p>Comestibles</p>
+                    </div>
+                    <div class="quant-date">
+                        <p class="plus">$10</p>
+                        <p>31/10/2021</p>
+                    </div>
+                </div>
+                <div class="record-card">
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
+                    </div>
+                    <div class="category-record">
+                        <p>Comestibles</p>
+                    </div>
+                    <div class="quant-date">
+                        <p class="minus">$10</p>
+                        <p>31/10/2021</p>
+                    </div>
+                </div>
+                <div class="record-card">
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
+                    </div>
+                    <div class="category-record">
+                        <p>Comestibles</p>
+                    </div>
+                    <div class="quant-date">
+                        <p class="minus">$10</p>
+                        <p>31/10/2021</p>
+                    </div>
+                </div>
+                <div class="record-card">
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
+                    </div>
+                    <div class="category-record">
+                        <p>Comestibles</p>
+                    </div>
+                    <div class="quant-date">
+                        <p class="minus">$10</p>
+                        <p>31/10/2021</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

@@ -15,6 +15,12 @@ def login(request):
 def general(request):
     return render(request, 'general.html')
 
+def account(request):
+    return render(request, 'account.html')
+
+def edit_record(request):
+    return render(request, 'edit-record.html')
+
 def add_account(request):
     return render(request, 'add-account.html')
 
