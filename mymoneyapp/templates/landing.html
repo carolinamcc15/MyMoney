@@ -11,6 +11,11 @@
         <div>
             <h2>¡Bienvenido a My Money!</h2>
             <p>Contamos con las mejores opciones para que lleves el control de tu dinero.</p>
+            <div id="header-options">
+                <!-- Todo si el usuario está loggeado (nombre y cerrar sesión) -->
+                <a class="button" href='{% url 'sign-up' %}' id="sign-up">Regístrate</a>
+                <a class="button" href='{% url 'log-in' %}' id="log-in">Iniciar sesión</a>
+            </div>
         </div>
         <img src="{% static 'images/landing.png' %}" alt="Personas administrando su dinero"/>
     </div>

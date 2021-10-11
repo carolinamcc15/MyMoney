@@ -24,11 +24,8 @@
                 </a>
                 <h1>My Money</h1>
             </div>
-            <div id="header-options">
-                <!-- Todo si el usuario está loggeado (nombre y cerrar sesión) -->
-                <a class="button" href='{% url 'sign-up' %}' id="sign-up">Regístrate</a>
-                <a class="button" href='{% url 'log-in' %}' id="log-in">Iniciar sesión</a>
-            </div>
+            {% block header %}
+            {% endblock %}
         </div>
     </header>
 
