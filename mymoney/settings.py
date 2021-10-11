@@ -75,15 +75,16 @@ WSGI_APPLICATION = 'mymoney.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg3',
-        'NAME': 'my_money',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mymoney',
+        'USER': 'carolina',
         'PASSWORD': '070067',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '', #Default
     }
 }
 
+AUTH_USER_MODEL = 'mymoneyapp.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
