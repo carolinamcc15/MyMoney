@@ -24,21 +24,17 @@
             <div class="icon-input">
                 <i class="fas fa-list"></i>
                 <select name="account" id="account" required>
-                    <option>Mi cuenta</option>
-                    <option>Dinero</option>
-                    <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                {% for account in accounts %}
+                    <option> {{  account.name }} </option>
+                {% endfor %}
                 </select>
             </div>
             <div class="icon-input">
                 <i class="fas fa-utensils"></i>
                 <select name="category" id="category" required>
-                    <option>Comida y bebida</option>
-                    <option>Regalos</option>
-                    <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                {% for category in categories %}
+                    <option> {{ category.category }} </option>
+                {% endfor %}
                 </select>
             </div>
             <div class="icon-input">

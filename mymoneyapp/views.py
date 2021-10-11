@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+from .models import User, Category, AccountType, Account, Record
+
 # Create your views here.
 def index(request):
     return render(request, 'landing.html')
@@ -22,8 +24,13 @@ def edit_record(request):
     return render(request, 'edit-record.html')
 
 def add_account(request):
-    return render(request, 'add-account.html')
+    return render(request, 'add-account.html', {
+        "types": AccountType.objects.all()
+    })
 
 def add_record(request):
-    return render(request, 'add-record.html')
+    return render(request, 'add-record.html', {
+        "categories": Category.objects.all(),
+        "accounts": Account.objects.all()
+    })
 

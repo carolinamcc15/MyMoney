@@ -22,11 +22,9 @@
             <div class="icon-input">
                 <i class="fas fa-list"></i>
                 <select name="account-type" id="account-type" required>
-                    <option>General</option>
-                    <option>Efectivo</option>
-                    <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                {% for type in types %}
+                    <option> {{  type.acc_type }} </option>
+                {% endfor %}
                 </select>
             </div>
             <button type="submit" form="add-account">Crear cuenta</button>
