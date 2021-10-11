@@ -24,8 +24,9 @@
                 </a>
                 <h1>My Money</h1>
             </div>
-            {% block header %}
-            {% endblock %}
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Cerrar sesión</a>
+            {% endif %}
         </div>
     </header>
 

@@ -1,0 +1,10 @@
+{% extends 'user-layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/login-sign.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+        <h2>{{ message }}</h2>
+{% endblock %}

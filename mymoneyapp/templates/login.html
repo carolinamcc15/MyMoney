@@ -7,7 +7,8 @@
 
 {% block body %}
         <h2>Inicio de sesión</h2>
-        <form id="login" method="POST" name="login" action="">
+        <form id="login" method="POST" name="login" action="{% url 'log-in' %}">
+            {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Usuario" required/>

@@ -7,10 +7,15 @@
 
 {% block body %}
         <h2>¡Crea una cuenta!</h2>
-        <form id="sign-up" method="POST" name="sign-up" action="">
+        <form id="sign-up" method="POST" name="sign-up" action="{% url 'sign-up' %}">
+            {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-user"></i>
-                <input type="text" name="name" placeholder="Nombre" required />
+                <input type="text" name="username" placeholder="Nombre de usuario" required />
+            </div>
+            <div class="icon-input">
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Nombre Apellido" required />
             </div>
             <div class="icon-input">
                 <i class="fas fa-envelope"></i>
