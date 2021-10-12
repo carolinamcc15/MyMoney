@@ -75,25 +75,41 @@ def add_record(request):
     if request.method == "POST":
         category =  request.POST['category']
         account = request.POST['account']
+        is_income = request.POST.get("is-income", None)
+        quantity = request.POST['quantity']
 
+        selected_account = Account.objects.get(name = account)
+        balance = selected_account.current_balance
+
+        if int(quantity) > balance:
+            return render(request, 'message.html', {
+                "message": "El dinero en la cuenta no alcanza"
+            })
+        
         new_record = Record(
             username =request.user, 
-            account = Account.objects.get(name = account),
+            account = selected_account,
             category = Category.objects.get(category = category),
-            is_income = request.POST.get("is-income", None),
-            quantity = request.POST['quantity'], 
+            is_income = is_income,
+            quantity = quantity, 
             date = datetime.datetime.now().strftime("%Y-%m-%d"),
             description = request.POST['description']
-            )
-
+        )
         new_record .save()
+
+        if is_income == 'False':
+            selected_account.current_balance = balance - int(quantity)
+        elif is_income == 'True':
+            selected_account.current_balance = balance + int(quantity)
+
+        selected_account.save()
+
         return HttpResponseRedirect(reverse("general"))
 
     return render(request, 'add-record.html', {
         "categories": Category.objects.all(),
         "accounts": Account.objects.all()
     })
-
 
 def sign_up(request):
     if request.method == 'POST':
