@@ -81,7 +81,7 @@ def add_record(request):
         selected_account = Account.objects.get(name = account)
         balance = selected_account.current_balance
 
-        if int(quantity) > balance:
+        if int(quantity) > balance and is_income == 'False':
             return render(request, 'message.html', {
                 "message": "El dinero en la cuenta no alcanza"
             })
@@ -108,7 +108,7 @@ def add_record(request):
 
     return render(request, 'add-record.html', {
         "categories": Category.objects.all(),
-        "accounts": Account.objects.all()
+        "accounts": Account.objects.filter(username = request.user)
     })
 
 def sign_up(request):
