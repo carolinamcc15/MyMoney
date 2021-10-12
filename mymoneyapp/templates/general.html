@@ -10,47 +10,47 @@
     <section id="accounts">
         <h2>Mis cuentas</h2>
         <div id="accounts-scroll">
+
+        {% for account in accounts %}
             <a href="{% url 'account' %}">
+
+            {% if account.acc_type.id == 1 %}
+                <div class="account-card general">
+                    <img src="{% static 'images/account/general.png' %}" alt="Billetera con dinero" />
+            {% elif account.acc_type.id == 2 %}
                 <div class="account-card cash">
-                    <img src="{% static 'images/account/money-bag.png' %}" alt="Dinero" />
-                    <p class="card-title">Efectivo
-                        <span>$350.99</span>
+                    <img src="{% static 'images/account/money-bag.png' %}" alt="Dinero en efectivo" />
+            {% elif account.acc_type.id == 3 %}
+                <div class="account-card savings">
+                    <img src="{% static 'images/account/savings.png' %}" alt="Alcancía de cerdito" />
+            {% else %}
+                <div class="account-card bank-card">
+                    <img src="{% static 'images/account/credit-card.png' %}" alt="Tarjeta de crédito o débito" />
+            {% endif %}
+
+                    <p class="card-title">{{ account.name }}
+                        <span>${{ account.current_balance }}</span>
                     </p>
                 </div>
             </a>
-            <!-- <div class="account-card general">
-                <img src="{% static 'images/account/general.png' %}" alt="Dinero" />
-                <p class="card-title">General
-                    <span>$350.99</span>
-                </p>
-            </div>
-            <div class="account-card savings">
-                <img src="{% static 'images/account/savings.png' %}" alt="Dinero" />
-                <p class="card-title">Ahorros
-                    <span>$350.99</span>
-                </p>
-            </div>
-            <div class="account-card bank-card">
-                <img src="{% static 'images/account/credit-card.png' %}" alt="Dinero" />
-                <p class="card-title">Tarjeta
-                    <span>$350.99</span>
-                </p>
-            </div> -->
+        {% endfor %}
+
             <a href="{% url 'add-account' %}">
                 <div id="add-account">
                     <i class="fas fa-plus"></i>
                     <p class="card-title">Añadir cuenta</p>
                 </div>
             </a>
-        </div>
+        </div>   
     </section>
+
     <section id="overview">
         <h2>Informe general</h2>
         <div id="overview-container">
             <div id="general-info">
                 <div id="total">
                     <h3>Total</h3>
-                    <p>$350.99</p>
+                    <p>${{ total }}</p>
                 </div>
                 <div id="top-categories">
                     <h3>Gastos principales</h3>
@@ -85,44 +85,28 @@
     <section id="recent">
         <h2>Registros recientes</h2>
         <div id="recent-records">
+        {% for record in recent_records %}
             <a href="{% url 'edit-record' %}">
                 <div class="record-card">
+                {% comment %} Validaciones para imagenes y categorias {% endcomment %}
                     <div class="record-img">
                         <img src="{% static 'images/categories/presents.png' %}" alt="Dinero" />
                     </div>
                     <div class="category-record">
                         <p>Comestibles</p>
                     </div>
+
                     <div class="quant-date">
-                        <p class="minus">$10</p>
-                        <p class="date">31/10/2021</p>
+                    {% if record.is_income %}
+                        <p class="plus">+{{ record.quantity }}</p>
+                    {% else %}
+                        <p class="minus">-{{ record.quantity }}</p>
+                    {% endif %}
+                        <p class="date">{{ record.date }}</p>
                     </div>
                 </div>
             </a>
-            <div class="record-card">
-                <div class="record-img">
-                    <img src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
-                </div>
-                <div class="category-record">
-                    <p>Comestibles</p>
-                </div>
-                <div class="quant-date">
-                    <p class="plus">$10</p>
-                    <p>31/10/2021</p>
-                </div>
-            </div>
-            <div class="record-card">
-                <div class="record-img">
-                    <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
-                </div>
-                <div class="category-record">
-                    <p>Comestibles</p>
-                </div>
-                <div class="quant-date">
-                    <p class="minus">$10</p>
-                    <p>31/10/2021</p>
-                </div>
-            </div>
+        {% endfor %}
         </div>
     </section>
     <a href="{% url 'add-record' %}">

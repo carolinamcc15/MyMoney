@@ -11,6 +11,7 @@
     <section>
         <img src="{% static 'images/account/add-account.svg' %}" alt="Nueva cuenta de dinero" />
         <form id="add-account" method="POST" name="add-account" action="">
+            {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-font"></i>
                 <input type="text" name="account-name" placeholder="Nombre" required />

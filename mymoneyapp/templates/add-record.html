@@ -11,10 +11,11 @@
     <section>
         <img src="{% static 'images/add-record.svg' %}" alt="Nueva cuenta de dinero" />
         <form id="add-record" method="POST" name="add-record" action="">
+            {% csrf_token %}
             <div class="icon-input toggle">
-                <input type="radio" id="expense" name="is-income" checked="checked" required />
+                <input type="radio" id="expense" value="False" name="is-income" checked="checked" required />
                 <label for="expense">Gasto</label>
-                <input type="radio" id="income" name="is-income" required />
+                <input type="radio" id="income" value="True" name="is-income" required />
                 <label for="income">Ingreso</label>
             </div>
             <div class="icon-input">
