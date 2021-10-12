@@ -12,7 +12,7 @@
         <div id="accounts-scroll">
 
         {% for account in accounts %}
-            <a href="{% url 'account' %}">
+            <a href="{% url 'account' account.id %}">
 
             {% if account.acc_type.id == 1 %}
                 <div class="account-card general">

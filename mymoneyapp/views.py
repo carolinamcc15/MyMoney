@@ -40,8 +40,25 @@ def general(request):
 
 
 @login_required
-def account(request):
-    return render(request, 'account.html')
+def account(request, id):
+    current_account = Account.objects.get(id = id)
+    if request.method == "POST":
+        acc_type =  str.strip(request.POST['account-type'])
+
+        Account.objects.filter(id = id).update(
+            username =request.user, 
+            acc_type = AccountType.objects.get(acc_type = acc_type), 
+            name = request.POST['account-name'], 
+            initial_balance = request.POST['balance'], 
+            current_balance = request.POST['balance']
+            )
+
+        return HttpResponseRedirect(reverse("general"))
+
+    return render(request, 'account.html', {
+        "account": current_account,
+        "types": AccountType.objects.all()
+    })
 
 
 @login_required

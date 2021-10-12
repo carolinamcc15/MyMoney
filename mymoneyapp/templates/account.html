@@ -11,23 +11,25 @@
     <div>
         <section>
             <form id="edit-account" method="POST" name="add-account" action="">
+                {% csrf_token %}
                 <div class="icon-input">
                     <i class="fas fa-font"></i>
-                    <input type="text" name="account-name" placeholder="Nombre" required />
+                    <input type="text" name="account-name" placeholder="Nombre" value="{{ account.name }}" required />
                 </div>
                 <div class="icon-input">
                     <i class="fas fa-dollar-sign"></i>
-                    <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00"
-                        required />
+                    <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00" value="{{ account.current_balance }}"required />
                 </div>
                 <div class="icon-input">
                     <i class="fas fa-list"></i>
-                    <select name="account-type" id="account-type" required>
-                        <option>General</option>
-                        <option>Efectivo</option>
-                        <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                    <select name="account-type" id="account-type" required >
+                    {% for type in types %}
+                        {% if account.acc_type.acc_type == type.acc_type %}
+                            <option value="{{  type.acc_type }} " selected> {{  type.acc_type }} </option>
+                        {% else %}
+                            <option value="{{  type.acc_type }} "> {{  type.acc_type }} </option>
+                        {% endif %}
+                    {% endfor %}
                     </select>
                 </div>
                 <button type="submit" form="edit-account">Guardar</button>
