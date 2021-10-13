@@ -42,7 +42,8 @@ def general(request):
 @login_required
 def account(request, id):
     current_account = Account.objects.get(id = id)
-    if request.method == "POST":
+    
+    if request.method == "POST" and "edit-account" in request.POST:
         acc_type =  str.strip(request.POST['account-type'])
 
         Account.objects.filter(id = id).update(

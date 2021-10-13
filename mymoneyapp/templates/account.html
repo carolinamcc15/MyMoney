@@ -7,7 +7,7 @@
 
 {% block body %}
 <main>
-    <h2>Nombre de la cuenta</h2>
+    <h2>{{ account.name }}</h2>
     <div>
         <section>
             <form id="edit-account" method="POST" name="add-account" action="">
@@ -32,7 +32,10 @@
                     {% endfor %}
                     </select>
                 </div>
-                <button type="submit" form="edit-account">Guardar</button>
+                <div id="buttons-container">
+                    <button type="submit" id="delete" name="delete-account" form="edit-account">Eliminar</button>
+                    <button type="submit" name="edit-account" form="edit-account">Guardar</button>
+                </div>
             </form>
         </section>
 
