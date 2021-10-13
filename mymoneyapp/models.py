@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     pass
 
-# Create your models here.
 class Category(models.Model):
     id = models.AutoField(primary_key=True, blank=False, null=False, unique=True)
     category = models.CharField(max_length = 25)
