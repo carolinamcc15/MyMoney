@@ -40,71 +40,66 @@
         </section>
 
         <section id="recent">
-            <div id="recent-records">
-                <a href="{% url 'edit-record' %}">
-                    <div class="record-card">
-                        <div class="record-img">
-                            <img src="{% static 'images/categories/shopping.png' %}" alt="Dinero" />
-                        </div>
-                        <div class="category-record">
-                            <p>Comestibles</p>
-                        </div>
-                        <div class="quant-date">
-                            <p class="minus">$10</p>
-                            <p class="date">31/10/2021</p>
-                        </div>
-                    </div>
-                </a>
+        <h2>Registros</h2>
+        <div id="recent-records">
+        {% for record in records %}
+            <a href="{% url 'edit-record' record.id %}">
                 <div class="record-card">
+                {% if record.category.id == 1 %}
                     <div class="record-img">
-                        <img src="{% static 'images/categories/fast-food.png' %}" alt="Dinero" />
+                        <img src="{% static 'images/categories/fast-food.png' %}" alt="Hamburguesa y bebida" />
                     </div>
+                {% elif record.category.id == 2 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/shopping.png' %}" alt="Bolsas de compras" />
+                    </div>
+                {% elif record.category.id == 4 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/house.png' %}" alt="Casa blanca" />
+                    </div>
+                {% elif record.category.id == 5 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/car.png' %}" alt="Vehículo color aqua" />
+                    </div>
+                {% elif record.category.id == 6 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/entertainment.png' %}" alt="Caja de sorpresas" />
+                    </div>
+                {% elif record.category.id == 7 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/message.png' %}" alt="Celular con mensaje" />
+                    </div>
+                {% elif record.category.id == 8 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/income.png' %}" alt="Monedas color oro" />
+                    </div>
+                {% elif record.category.id == 9 %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/stonks.png' %}" alt="Inversiones" />
+                    </div>
+                {% else %}
+                    <div class="record-img">
+                        <img src="{% static 'images/categories/others.png' %}" alt="Otras opciones" />
+                    </div>
+                {% endif %}
+
+
                     <div class="category-record">
-                        <p>Comestibles</p>
+                        <p>{{ record.category.category }}</p>
                     </div>
                     <div class="quant-date">
-                        <p class="plus">$10</p>
-                        <p>31/10/2021</p>
+                    {% if record.is_income %}
+                        <p class="plus">+{{ record.quantity }}</p>
+                    {% else %}
+                        <p class="minus">-{{ record.quantity }}</p>
+                    {% endif %}
+                        <p class="date">{{ record.date }}</p>
                     </div>
                 </div>
-                <div class="record-card">
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
-                    </div>
-                    <div class="category-record">
-                        <p>Comestibles</p>
-                    </div>
-                    <div class="quant-date">
-                        <p class="minus">$10</p>
-                        <p>31/10/2021</p>
-                    </div>
-                </div>
-                <div class="record-card">
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
-                    </div>
-                    <div class="category-record">
-                        <p>Comestibles</p>
-                    </div>
-                    <div class="quant-date">
-                        <p class="minus">$10</p>
-                        <p>31/10/2021</p>
-                    </div>
-                </div>
-                <div class="record-card">
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/house.png' %}" alt="Dinero" />
-                    </div>
-                    <div class="category-record">
-                        <p>Comestibles</p>
-                    </div>
-                    <div class="quant-date">
-                        <p class="minus">$10</p>
-                        <p>31/10/2021</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </a>
+        {% endfor %}
+        </div>
+    </section>
     </div>
 </main>
 {% endblock %}

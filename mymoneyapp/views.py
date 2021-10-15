@@ -25,7 +25,8 @@ def general(request):
     records = Record.objects.filter(username = user)
     total = 0
     recent_records = []
-    
+    # 
+    categories_count = []
     for account in accounts:
         total = total + account.current_balance
 
@@ -84,7 +85,8 @@ def account(request, id):
 
     return render(request, 'account.html', {
         "account": current_account,
-        "types": AccountType.objects.all()
+        "types": AccountType.objects.all(),
+        "records": Record.objects.filter(account = current_account)
     })
 
 
@@ -154,7 +156,6 @@ def edit_record(request, id):
             category = Category.objects.get(category = category),
             is_income = is_income,
             quantity = request.POST['quantity'],
-            date = datetime.datetime.now().strftime("%Y-%m-%d"),
             description = request.POST['description']
             )
 
