@@ -5,11 +5,11 @@ class User(AbstractUser):
     pass
 
 class Category(models.Model):
-    id = models.AutoField(primary_key=True, blank=False, null=False, unique=True)
+    id = models.IntegerField(primary_key=True, blank=False, null=False, unique=True)
     category = models.CharField(max_length = 25)
 
 class AccountType(models.Model):
-    id = models.AutoField(primary_key=True, blank=False, null=False, unique=True)
+    id = models.IntegerField(primary_key=True, blank=False, null=False, unique=True)
     acc_type = models.CharField(max_length = 25)
 
 class Account(models.Model):

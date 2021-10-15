@@ -3,14 +3,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-import datetime
 from django.db import IntegrityError
+
+import datetime
+from .functions import categories
+from .functions import account_types
 
 from .models import User, Category, AccountType, Account, Record
 
 # Create your views here.
 def index(request):
     user = request.user
+
+    categories.populate_categories()
+    account_types.populate_types()
 
     if user.is_authenticated:
         return HttpResponseRedirect(reverse("general"))
@@ -26,17 +32,17 @@ def general(request):
     total = 0
     recent_records = []
     # 
-    categories_count = []
-    for account in accounts:
-        total = total + account.current_balance
+    # categories_count = []
+    # for account in accounts:
+    #     total = total + account.current_balance
 
-    for i in range(len(records) - 1, len(records) - 5, -1):
-        recent_records.append(records[i])
+    # for i in range(len(records) - 1, len(records) - 5, -1):
+    #     recent_records.append(records[i])
 
     return render(request, 'general.html', {
         "accounts": accounts,
         "total": total,
-        "recent_records": recent_records
+        "recent_records": records
     })
 
 
