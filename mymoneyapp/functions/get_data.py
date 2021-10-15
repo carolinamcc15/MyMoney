@@ -1,19 +1,15 @@
 from ..models import Record
     
 def recent(user):
-    records = Record.objects.filter(username = user)
-    last_index = len(records) - 1
+    records = Record.objects.filter(username = user).order_by('-update_datetime')
+    recent_records = []
+    counter = 0
 
-    if len(records) == 0 or last_index == 0:
-        return records
+    for record in records:
+        recent_records.append(record)
+        counter = counter + 1
 
-    else:
-        recent_records = []
-        i = last_index
-        counter = 0
-
-        while counter < 6 and i >= 0:
-            recent_records.append(records[i])
-            i = i - 1
-            counter = counter + 1
-        return recent_records
+        if len(recent_records) == 6:
+            break
+        
+    return recent_records

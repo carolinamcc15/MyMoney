@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
@@ -68,6 +68,7 @@ def add_account(request):
 @login_required
 def account(request, id):
     current_account = Account.objects.get(id = id)
+    records = Record.objects.filter(account = current_account).order_by('-update_datetime')
     
     if request.method == "POST" and "edit-account" in request.POST:
         acc_type =  str.strip(request.POST['account-type'])
@@ -90,7 +91,7 @@ def account(request, id):
     return render(request, 'account.html', {
         "account": current_account,
         "types": AccountType.objects.all(),
-        "records": Record.objects.filter(account = current_account),
+        "records": records,
         "norecords": "No se encontraron registros"
     })
 
@@ -118,6 +119,7 @@ def add_record(request):
             is_income = is_income,
             quantity = quantity, 
             date = datetime.datetime.now().strftime("%Y-%m-%d"),
+            update_datetime = datetime.datetime.now(),
             description = request.POST['description']
         )
         new_record .save()
@@ -174,6 +176,11 @@ def edit_record(request, id):
         return HttpResponseRedirect(reverse("general"))
 
     elif request.method == "POST" and "delete-record" in request.POST:
+        # if current_record.is_income:
+        #     current_record.account.current_balance = current_record.account.current_balance - float(quantity)
+        # else:
+        #     current_record.account.current_balance = current_record.account.current_balance + float(quantity)
+
         Record.objects.filter(id = id).delete()
 
         return HttpResponseRedirect(reverse("general"))
