@@ -6,6 +6,12 @@ h2 {
     padding-bottom: 1rem;
 }
 
+p.empty {
+    font-size: 1.3rem;
+    color: gray;
+    margin-bottom: 2rem;
+}
+
 a {
     text-decoration: none;
 }
@@ -226,6 +232,29 @@ p.date {
 
 footer {
     display: none;
+}
+
+div#floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: rgb(97, 209, 97);
+    border-radius: 100px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+div#floating-button:hover {
+    background-color: rgb(71, 175, 71);;
+}
+
+
+div#floating-button .fa-plus{
+    color: #fff;
+    font-size: 3rem;
 }
 
 @media only screen and (max-width: 768px) {

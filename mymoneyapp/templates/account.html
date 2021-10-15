@@ -41,6 +41,11 @@
 
         <section id="recent">
         <h2>Registros</h2>
+
+        {% if records|length == 0 %}
+            <p class="empty"> {{ norecords }}</p>
+
+        {% else %}
         <div id="recent-records">
         {% for record in records %}
             <a href="{% url 'edit-record' record.id %}">
@@ -99,7 +104,13 @@
             </a>
         {% endfor %}
         </div>
+        {% endif %}
     </section>
     </div>
+    <a href="{% url 'add-record' %}">
+        <div id="floating-button">
+            <i class="fas fa-plus"></i>
+        </div>
+    </a>
 </main>
 {% endblock %}

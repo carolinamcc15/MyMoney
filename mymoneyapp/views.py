@@ -8,6 +8,7 @@ from django.db import IntegrityError
 import datetime
 from .functions import categories
 from .functions import account_types
+from .functions import get_data
 
 from .models import User, Category, AccountType, Account, Record
 
@@ -28,21 +29,18 @@ def index(request):
 def general(request):
     user = request.user
     accounts = Account.objects.filter(username = user)
-    records = Record.objects.filter(username = user)
     total = 0
-    recent_records = []
-    # 
-    # categories_count = []
-    # for account in accounts:
-    #     total = total + account.current_balance
+    recent_records = get_data.recent(user)
+    categories_count = []
 
-    # for i in range(len(records) - 1, len(records) - 5, -1):
-    #     recent_records.append(records[i])
+    for account in accounts:
+        total = total + account.current_balance
 
     return render(request, 'general.html', {
         "accounts": accounts,
         "total": total,
-        "recent_records": records
+        "recent_records": recent_records,
+        "norecords": "No se encontraron registros"
     })
 
 
@@ -92,7 +90,8 @@ def account(request, id):
     return render(request, 'account.html', {
         "account": current_account,
         "types": AccountType.objects.all(),
-        "records": Record.objects.filter(account = current_account)
+        "records": Record.objects.filter(account = current_account),
+        "norecords": "No se encontraron registros"
     })
 
 
@@ -123,7 +122,7 @@ def add_record(request):
         )
         new_record .save()
 
-        if not is_income == 'False':
+        if is_income == 'False':
             selected_account.current_balance = float(balance) - float(quantity)
         else:
             selected_account.current_balance = float(balance) + float(quantity)
@@ -218,12 +217,10 @@ def sign_up(request):
 def log_in(request):
     if request.method == "POST":
 
-        # Attempt to sign user in
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
 
-            # Check if authentication successful
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("general"))

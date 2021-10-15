@@ -10,6 +10,12 @@
     <h2>Nuevo registro</h2>
     <section>
         <img src="{% static 'images/add-record.svg' %}" alt="Nueva cuenta de dinero" />
+        {% if accounts|length == 0 %}
+            <div id="info-message">
+                <p class="empty"> Debe disponer de una cuenta para guardar el registro </p>
+                <a class="button" href='{% url 'add-account' %}' id="log-in">Crear cuenta</a>
+            </div>
+        {% else %}
         <form id="add-record" method="POST" name="add-record" action="">
             {% csrf_token %}
             <div class="icon-input toggle">
@@ -44,6 +50,7 @@
             </div>
             <button type="submit" form="add-record">Añadir registro</button>
         </form>
+        {% endif %}
     </section>
 </main>
 {% endblock %}
