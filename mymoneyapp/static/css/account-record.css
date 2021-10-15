@@ -117,6 +117,12 @@ input:focus {
     outline: none;
 }
 
+div#buttons-container {
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+}
+
 button {
     padding: 0.8rem 2rem;
     margin-top: 1rem;
@@ -130,6 +136,12 @@ button {
 
 button:hover {
     cursor: pointer;
+}
+
+button#delete {
+    border: 2px solid rgb(199, 1, 1);
+    background-color: transparent;
+    color: rgb(199, 1, 1);
 }
 
 footer {

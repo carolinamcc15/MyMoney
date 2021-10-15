@@ -10,42 +10,59 @@
     <h2>Editar registro</h2>
     <section>
         <img src="{% static 'images/add-record.svg' %}" alt="Nueva cuenta de dinero" />
-        <form id="edit-record" method="POST" name="add-record" action="">
+        <form id="edit-record" method="POST" name="edit-record" action="">
+            {% csrf_token %}
             <div class="icon-input toggle">
-                <input type="radio" id="expense" name="is-income" checked="checked" required />
+
+            {% if not record.is_income %}
+                <input type="radio" id="expense" name="is-income" checked="checked" value="False" required />
                 <label for="expense">Gasto</label>
-                <input type="radio" id="income" name="is-income" required />
+                <input type="radio" id="income" name="is-income" value="True" required />
                 <label for="income">Ingreso</label>
+            {% else %}
+                <input type="radio" id="expense" name="is-income"  value="False" required />
+                <label for="expense">Gasto</label>
+                <input type="radio" id="income" name="is-income" value="True" checked="checked" required />
+                <label for="income">Ingreso</label>
+            {% endif %}
+
             </div>
             <div class="icon-input">
                 <i class="fas fa-dollar-sign"></i>
-                <input type="number" name="quantity" placeholder="Cantidad ($)" step="0.01" min="0.00" required />
+                <input type="number" name="quantity" placeholder="Cantidad ($)" value="{{ record.quantity }}" step="0.01" min="0.00" required />
             </div>
             <div class="icon-input">
                 <i class="fas fa-list"></i>
                 <select name="account" id="account" required>
-                    <option>Mi cuenta</option>
-                    <option>Dinero</option>
-                    <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                {% for account in accounts %}
+                    {% if record.account.name == account.name %}
+                            <option value="{{  account.name }} " selected> {{  account.name }} </option>
+                    {% else %}
+                        <option value="{{  account.name }} "> {{  account.name }} </option>
+                    {% endif %}
+                {% endfor %}
                 </select>
             </div>
             <div class="icon-input">
                 <i class="fas fa-utensils"></i>
                 <select name="category" id="category" required>
-                    <option>Comida y bebida</option>
-                    <option>Regalos</option>
-                    <!-- {% for category in categories %}
-                <option> {{ category.category }} </option>
-                {% endfor %} -->
+                {% for category in categories %}
+                    {% if record.category.category == category.category %}
+                            <option value="{{ category.category }} " selected> {{  category.category }} </option>
+                    {% else %}
+                        <option value="{{  category.category }} "> {{  category.category }} </option>
+                    {% endif %}
+                {% endfor %}
                 </select>
             </div>
             <div class="icon-input">
                 <i class="fas fa-font"></i>
-                <input type="text" name="description" placeholder="Descripción" />
+                <input type="text" name="description" value="{{ record.description }}" placeholder="Descripción" />
             </div>
-            <button type="submit" form="edit-record">Guardar</button>
+            <div id="buttons-container">
+                <button type="submit" id="delete" name="delete-record" form="edit-record">Eliminar</button>
+                <button type="submit" name="edit-record" form="edit-record">Guardar</button>
+            </div>
         </form>
     </section>
 </main>

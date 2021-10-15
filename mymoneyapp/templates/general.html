@@ -12,7 +12,7 @@
         <div id="accounts-scroll">
 
         {% for account in accounts %}
-            <a href="{% url 'account' account.id %}">
+           <a href="{% url 'account' account.id %}">
 
             {% if account.acc_type.id == 1 %}
                 <div class="account-card general">
@@ -60,19 +60,19 @@
                                 <img class="large-icon" src="{% static 'images/categories/fast-food.png' %}"
                                     alt="Dinero" />
                             </div>
-                            <p class="sm-title">Efectivo</p>
+                            <p class="sm-title">Comida y bebida</p>
                         </div>
                         <div class="category">
                             <div class="catogory-img">
-                                <img class="large-icon" src="{% static 'images/categories/magic.png' %}" alt="Dinero" />
+                                <img class="large-icon" src="{% static 'images/categories/entertainment.png' %}" alt="Dinero" />
                             </div>
-                            <p class="sm-title">Efectivo</p>
+                            <p class="sm-title">Entretenimiento</p>
                         </div>
                         <div class="category">
                             <div class="catogory-img">
                                 <img class="large-icon" src="{% static 'images/categories/car.png' %}" alt="Dinero" />
                             </div>
-                            <p class="sm-title">Efectivo</p>
+                            <p class="sm-title">Transporte</p>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
         <h2>Registros recientes</h2>
         <div id="recent-records">
         {% for record in recent_records %}
-            <a href="{% url 'edit-record' %}">
+            <a href="{% url 'edit-record' record.id %}">
                 <div class="record-card">
                 {% if record.category.id == 1 %}
                     <div class="record-img">

@@ -42,7 +42,7 @@ header {
 #header-options {
     height: 85px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     padding-right: 2rem;
     align-items: center;
 }
@@ -50,6 +50,16 @@ header {
 #header-options > a, #header-options > a:visited {
     color: #fff;
 }
+
+#header-options > a#sign-up {
+    background-color: transparent;
+    color: var(--secondary);
+}
+
+#header-options > a#sign-up:visited {
+    color: var(--secondary);
+}
+
 
 i.fa-power-off {
     font-size: 1.5rem;
