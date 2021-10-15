@@ -28,6 +28,6 @@ class Record(models.Model):
     is_income = models.BooleanField(default=False)
     quantity = models.DecimalField(max_digits = 10, decimal_places=2)
     date = models.DateField()
-    description = models.CharField(max_length = 150)
+    description = models.CharField(max_length = 75)
 
     

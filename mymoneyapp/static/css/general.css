@@ -95,11 +95,11 @@ div.bank-card:hover {
 }
 
 div#add-account {
-    background-image: linear-gradient(45deg, #bababa 0%, #d6d6d6 52%, #e0dede 100%);
+    background-image: linear-gradient(45deg, #a3a3a3 0%, #bbbbbb 52%, #c5c5c5 100%);
 }
 
 div#add-account:hover {
-    background-image: linear-gradient(25deg, #a8a8a8 0%, #c0c0c0 52%, #dadada 100%);
+    background-image: linear-gradient(25deg, #9c9c9c 0%, #aaaaaa 52%, #b6b6b6 100%);
 }
 
 div#add-account .fa-plus {

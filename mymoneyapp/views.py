@@ -40,34 +40,6 @@ def general(request):
 
 
 @login_required
-def account(request, id):
-    current_account = Account.objects.get(id = id)
-    
-    if request.method == "POST" and "edit-account" in request.POST:
-        acc_type =  str.strip(request.POST['account-type'])
-
-        Account.objects.filter(id = id).update(
-            username =request.user, 
-            acc_type = AccountType.objects.get(acc_type = acc_type), 
-            name = request.POST['account-name'], 
-            initial_balance = request.POST['balance'], 
-            current_balance = request.POST['balance']
-            )
-
-        return HttpResponseRedirect(reverse("general"))
-
-    return render(request, 'account.html', {
-        "account": current_account,
-        "types": AccountType.objects.all()
-    })
-
-
-@login_required
-def edit_record(request):
-    return render(request, 'edit-record.html')
-
-
-@login_required
 def add_account(request):
     if request.method == "POST":
         acc_type =  request.POST['account-type']
@@ -86,6 +58,34 @@ def add_account(request):
     return render(request, 'add-account.html', {
         "types": AccountType.objects.all()
     })
+    
+
+@login_required
+def account(request, id):
+    current_account = Account.objects.get(id = id)
+    
+    if request.method == "POST" and "edit-account" in request.POST:
+        acc_type =  str.strip(request.POST['account-type'])
+
+        Account.objects.filter(id = id).update(
+            username =request.user, 
+            acc_type = AccountType.objects.get(acc_type = acc_type), 
+            name = request.POST['account-name'], 
+            initial_balance = request.POST['balance'], 
+            current_balance = request.POST['balance']
+            )
+
+        return HttpResponseRedirect(reverse("general"))
+
+    elif request.method == "POST" and "delete-account" in request.POST:
+        Account.objects.filter(id = id).delete()
+
+        return HttpResponseRedirect(reverse("general"))
+
+    return render(request, 'account.html', {
+        "account": current_account,
+        "types": AccountType.objects.all()
+    })
 
 
 @login_required
@@ -99,7 +99,7 @@ def add_record(request):
         selected_account = Account.objects.get(name = account)
         balance = selected_account.current_balance
 
-        if int(quantity) > balance and is_income == 'False':
+        if float(quantity) > float(balance) and is_income:
             return render(request, 'message.html', {
                 "message": "El dinero en la cuenta no alcanza"
             })
@@ -115,10 +115,10 @@ def add_record(request):
         )
         new_record .save()
 
-        if is_income == 'False':
-            selected_account.current_balance = balance - int(quantity)
-        elif is_income == 'True':
-            selected_account.current_balance = balance + int(quantity)
+        if not is_income == 'False':
+            selected_account.current_balance = float(balance) - float(quantity)
+        else:
+            selected_account.current_balance = float(balance) + float(quantity)
 
         selected_account.save()
 
@@ -128,6 +128,56 @@ def add_record(request):
         "categories": Category.objects.all(),
         "accounts": Account.objects.filter(username = request.user)
     })
+
+
+@login_required
+def edit_record(request, id):
+    current_record = Record.objects.get(id = id)
+
+    if request.method == "POST" and "edit-record" in request.POST:
+        category =  str.strip(request.POST['category'])
+        account =  str.strip(request.POST['account'])
+        is_income = request.POST.get("is-income", None)
+        quantity = request.POST['quantity']
+
+        selected_account = Account.objects.get(name = account)
+        balance = float(selected_account.current_balance)
+
+        if float(quantity) > float(balance) and is_income == 'False':
+            return render(request, 'message.html', {
+                "message": "El dinero en la cuenta no alcanza"
+            })
+
+        Record.objects.filter(id = id).update(
+            username =request.user, 
+            account = selected_account,
+            category = Category.objects.get(category = category),
+            is_income = is_income,
+            quantity = request.POST['quantity'],
+            date = datetime.datetime.now().strftime("%Y-%m-%d"),
+            description = request.POST['description']
+            )
+
+        if is_income == 'False':
+            selected_account.current_balance = balance - float(quantity)
+        else:
+            selected_account.current_balance = balance + float(quantity)
+
+        selected_account.save()
+
+        return HttpResponseRedirect(reverse("general"))
+
+    elif request.method == "POST" and "delete-record" in request.POST:
+        Record.objects.filter(id = id).delete()
+
+        return HttpResponseRedirect(reverse("general"))
+
+    return render(request, 'edit-record.html', {
+        "record": current_record,
+        "categories": Category.objects.all(),
+        "accounts": Account.objects.filter(username = request.user)
+    })
+
 
 def sign_up(request):
     if request.method == 'POST':
