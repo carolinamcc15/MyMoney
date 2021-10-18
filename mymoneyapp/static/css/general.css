@@ -11,7 +11,7 @@ section {
     flex-direction: column;
     background-color: #f5f5f5;
     padding: 1.7rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     border-radius: 20px;
 }
 
@@ -195,7 +195,7 @@ div#top-categories {
 
 div#categories-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 div.category {
@@ -204,8 +204,9 @@ div.category {
     flex-direction: column;
 }
 
-div.category-img {
+div.catogory-img {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
@@ -213,6 +214,7 @@ div.category-img {
 
 img.large-icon {
     width: 80px;
+    margin: auto;
 }
 
 p.sm-title {

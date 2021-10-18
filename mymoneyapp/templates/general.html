@@ -55,25 +55,57 @@
                 <div id="top-categories">
                     <h3>Gastos principales</h3>
                     <div id="categories-container">
+
+                        {% for category in top %}
                         <div class="category">
-                            <div class="catogory-img">
-                                <img class="large-icon" src="{% static 'images/categories/fast-food.png' %}"
-                                    alt="Dinero" />
-                            </div>
-                            <p class="sm-title">Comida y bebida</p>
+                            {% if category.id == 1 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/fast-food.png' %}" class="large-icon" alt="Hamburguesa y bebida" />
+                                    <p class="sm-title">Comida y bebida</p>
+                                </div>
+                            {% elif category.id == 2 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/shopping.png' %}" class="large-icon" alt="Bolsas de compras" />
+                                    <p class="sm-title">Compras</p>
+                                </div>
+                            {% elif category.id == 3 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/house.png' %}" class="large-icon" alt="Casa blanca" />
+                                    <p class="sm-title">Vivienda</p>
+                                </div>
+                            {% elif category.id == 4 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/car.png' %}" class="large-icon" alt="Vehículo color aqua" />
+                                    <p class="sm-title">Transporte</p>
+                                </div>
+                            {% elif category.id == 5 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/entertainment.png' %}" class="large-icon" alt="Caja de sorpresas" />
+                                    <p class="sm-title">Entretenimiento</p>
+                                </div>
+                            {% elif category.id == 6 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/message.png' %}" class="large-icon" alt="Celular con mensaje" />
+                                    <p class="sm-title">Comunicaciones</p>
+                                </div>
+                            {% elif category.id == 7 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/income.png' %}" class="large-icon" alt="Monedas color oro" />
+                                    <p class="sm-title">Ingreso</p>
+                                </div>
+                            {% elif category.id == 8 %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/stonks.png' %}" class="large-icon" alt="Inversiones" />
+                                    <p class="sm-title">Inversiones</p>
+                                </div>
+                            {% else %}
+                                <div class="catogory-img">
+                                    <img src="{% static 'images/categories/others.png' %}" class="large-icon" alt="Otras opciones" />
+                                    <p class="sm-title">Otros</p>
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="category">
-                            <div class="catogory-img">
-                                <img class="large-icon" src="{% static 'images/categories/entertainment.png' %}" alt="Dinero" />
-                            </div>
-                            <p class="sm-title">Entretenimiento</p>
-                        </div>
-                        <div class="category">
-                            <div class="catogory-img">
-                                <img class="large-icon" src="{% static 'images/categories/car.png' %}" alt="Dinero" />
-                            </div>
-                            <p class="sm-title">Transporte</p>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import User, Category, AccountType, Account, Record
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'first_name', 'last_name', 'password')
+    list_display = ('username', 'email', 'first_name', 'last_name')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'category')
@@ -15,7 +15,6 @@ class AccountAdmin(admin.ModelAdmin):
 
 class RecordAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'account', 'category', 'is_income', 'quantity', 'date', 'description')
-
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Category, CategoryAdmin)

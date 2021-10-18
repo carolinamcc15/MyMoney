@@ -30,8 +30,9 @@ def general(request):
     user = request.user
     accounts = Account.objects.filter(username = user)
     total = 0
+
     recent_records = get_data.recent(user)
-    categories_count = []
+    top_categories = get_data.top_categories(user)
 
     for account in accounts:
         total = total + account.current_balance
@@ -40,7 +41,8 @@ def general(request):
         "accounts": accounts,
         "total": total,
         "recent_records": recent_records,
-        "norecords": "No se encontraron registros"
+        "top": top_categories,
+        "norecords": "No se encontraron registros",
     })
 
 
