@@ -197,7 +197,6 @@ def edit_record(request, id):
 def sign_up(request):
     if request.method == 'POST':
         username = request.POST['username']
-        name = request.POST['name']
         email = request.POST['email']
         password = request.POST['password']
         confirm = request.POST['confirm-password']
@@ -209,8 +208,6 @@ def sign_up(request):
         
         try:
             new_user = User.objects.create_user(username, email, password)
-            new_user.first_name = name
-            
             new_user.save()
                 
         except IntegrityError:
