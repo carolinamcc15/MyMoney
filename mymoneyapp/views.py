@@ -247,5 +247,5 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("index"), {
 })
 
-# def error_404(request, exception):
-#     return render(request, 'error404.html')
+def error_404(request, exception):
+    return render(request, 'not-found.html')
