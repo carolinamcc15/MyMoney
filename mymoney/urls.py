@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('uwonthackmeeee155266/', admin.site.urls),
     path('', include('mymoneyapp.urls')),
 ]
+
+# handler404 = 'mymoneyapp.views.error_404'

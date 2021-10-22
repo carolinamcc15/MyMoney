@@ -12,7 +12,7 @@
         <div id="accounts-scroll">
 
         {% for account in accounts %}
-           <a href="{% url 'account' account.id %}">
+            <a href="{% url 'account' account.id %}">
 
             {% if account.acc_type.id == 1 %}
                 <div class="account-card general">
@@ -55,7 +55,9 @@
                 <div id="top-categories">
                     <h3>Gastos principales</h3>
                     <div id="categories-container">
-
+                        {% if top|length == 0%}
+                            <p class="empty"> {{ norecords }}</p>
+                        {% endif %}
                         {% for category in top %}
                         <div class="category">
                             {% if category.id == 1 %}

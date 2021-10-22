@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
-
 import datetime
+
 from .functions import categories
 from .functions import account_types
 from .functions import get_data
@@ -197,7 +197,7 @@ def edit_record(request, id):
 def sign_up(request):
     if request.method == 'POST':
         username = request.POST['username']
-        name = request.POST['name'].split(sep=" ", maxsplit=1)
+        name = request.POST['name']
         email = request.POST['email']
         password = request.POST['password']
         confirm = request.POST['confirm-password']
@@ -209,10 +209,10 @@ def sign_up(request):
         
         try:
             new_user = User.objects.create_user(username, email, password)
-            new_user.first_name = name[0]
-            new_user.last_name = name[1]
+            new_user.first_name = name
+            
             new_user.save()
-
+                
         except IntegrityError:
             return render(request, "message.html", {
                 "message": "Username already taken."
@@ -246,3 +246,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"), {
 })
+
+# def error_404(request, exception):
+#     return render(request, 'error404.html')
