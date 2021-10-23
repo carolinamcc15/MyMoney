@@ -268,21 +268,24 @@ def sign_up(request):
 
 def log_in(request):
     if request.method == "POST":
-
         username = request.POST['username']
         password = request.POST['password']
-        
-        user = authenticate(request, username=username, password=password)
+
+        user = authenticate(request, username = username, password = password)
 
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("general"))
         else:
-            return render(request, "message.html", {
-                "message": "Invalid username and/or password."
+            return render(request, 'login.html', {
+                "failed": True,
+                "username": username
             })
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html', {
+            "failed": False,
+            "username": ""
+        })
 
 
 @login_required
