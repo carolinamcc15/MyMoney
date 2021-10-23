@@ -4,7 +4,9 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
+
 import datetime
+import re
 
 from .functions import categories
 from .functions import account_types
@@ -201,23 +203,67 @@ def sign_up(request):
         password = request.POST['password']
         confirm = request.POST['confirm-password']
 
-        if password != confirm:
-            return render(request, 'message.html', {
-                "message": "Passwords do not match"
-            })
+        email_msg = False
+        username_msg = False
+        password_msg = False
+        insecure_password = False
+
+        # Regex validation
+        email_pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+        username_pattern = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+        password_pattern = "((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})"
         
+        if not re.search(email_pattern, email):
+            email_msg = True
+
+        if not re.search(username_pattern, username):
+            username_msg = True
+
+        if not re.search(password_pattern, password):
+            insecure_password = True
+
+        if password != confirm:
+            password_msg = True
+        
+        if email_msg or username_msg or insecure_password or password_msg:
+            return render(request, 'sign-up.html', {
+                "username": username,
+                "email": email,
+                "username_msg": username_msg,
+                "taken": False,
+                "email_msg": email_msg,
+                "password_msg": password_msg,
+                "insecure_password": insecure_password
+            })
+
         try:
             new_user = User.objects.create_user(username, email, password)
             new_user.save()
                 
         except IntegrityError:
-            return render(request, "message.html", {
-                "message": "Username already taken."
+            return render(request, 'sign-up.html', {
+                "username": username,
+                "email": email,
+                "username_msg": username_msg,
+                "taken": True,
+                "email_msg": email_msg,
+                "password_msg": password_msg,
+                "insecure_password": insecure_password
             })
+
         login(request, new_user)
+
         return HttpResponseRedirect(reverse("general"))
     else:
-        return render(request, 'sign-up.html')
+        return render(request, 'sign-up.html', {
+                "username": "",
+                "email": "",
+                "username_msg": False,
+                "taken": False,
+                "email_msg": False,
+                "password_msg": False,
+                "insecure_password": False
+            })
 
 
 def log_in(request):
@@ -225,6 +271,7 @@ def log_in(request):
 
         username = request.POST['username']
         password = request.POST['password']
+        
         user = authenticate(request, username=username, password=password)
 
         if user is not None:

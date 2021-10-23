@@ -1,5 +1,5 @@
 h2 {
-    margin: 0 auto 2rem;
+    margin: 0 auto 0.5rem;
     text-align: center;
 }
 
@@ -16,7 +16,9 @@ div.icon-input {
     max-width: 650px;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+
+    transition: ease-in-out all 0.2s;
 }
 
 div.icon-input i {
@@ -36,9 +38,13 @@ input:focus {
     outline: none;
 }
 
+div#password:focus-within ~ p.informative {
+    display: block;
+}
+
 button {
     padding: 0.8rem 2rem;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     border: none;
     border-radius: 15px;
     font-size: 1rem;
@@ -49,6 +55,24 @@ button {
 
 button:hover {
     cursor: pointer;
+}
+
+p.input-message {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: right;
+
+    color: rgb(168, 0, 0);
+
+    margin: 0.7rem 0 0;
+
+    width: 70%;
+    max-width: 600px;
+}
+
+p.informative {
+    color: rgb(0, 0, 153);
+    display: none;
 }
 
 @media only screen and (max-width: 768px) {

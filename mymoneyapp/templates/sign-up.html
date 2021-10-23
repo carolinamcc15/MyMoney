@@ -11,20 +11,40 @@
             {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Nombre de usuario" required />
+                <input type="text" name="username" value="{{ username }}" placeholder="Nombre de usuario" required />
             </div>
+            {% if username_msg %}
+                <p class="input-message">Nombre de usuario no válido</p>
+            {% endif %}
+            {% if taken %}
+                <p class="input-message">El nombre de usuario ya existe</p>
+            {% endif %}
             <div class="icon-input">
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Correo electrónico" required />
+                <input type="email" name="email"  value="{{ email }}"  placeholder="Correo electrónico" required />
             </div>
-            <div class="icon-input">
+            {% if email_msg %}
+                <p class="input-message">Correo electrónico no válido</p>
+            {% endif %}
+            <div class="icon-input" id="password">
                 <i class="fas fa-lock"></i>
                 <input type="password" name="password" placeholder="Contraseña" required />
             </div>
+            {% if insecure_password %}
+                <p class="input-message">La contraseña ingresada es insegura</p>
+            {% endif %}
+            <p class="input-message informative hidden">
+                Utiliza más de 8 caracteres
+                </br>
+                <strong>Al menos</strong> una minúscula, una mayúscula, un dígito y un símbolo
+            </p>
             <div class="icon-input">
                 <i class="fas fa-lock"></i>
                 <input type="password" name="confirm-password" placeholder="Confirmar contraseña" required />
             </div>
+            {% if password_msg %}
+                <p class="input-message">Las contraseñas no coinciden</p>
+            {% endif %}
             <button type="submit" form="sign-up">Crear cuenta</button>
         </form>
 {% endblock %}
