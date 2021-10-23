@@ -50,7 +50,7 @@
             <div id="general-info">
                 <div id="total">
                     <h3>Total</h3>
-                    <p>${{ total }}</p>
+                    <p><span id="total-span">$ </span>{{ total }}</p>
                 </div>
                 <div id="top-categories">
                     <h3>Gastos principales</h3>
@@ -110,9 +110,6 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
-            <div id="money-chart">
-
             </div>
         </div>
     </section>

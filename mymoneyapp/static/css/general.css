@@ -132,65 +132,41 @@ p.card-title > span {
     font-weight: 600;
 }
 
+span#total-span {
+    color: rgb(5, 151, 0);
+    font-weight: 700;
+    font-size: 2.4rem;
+}
+
 div.account-card > img {
     width: 52px;
     margin-bottom: 0.3rem;
 }
 
-div#overview-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-}
-
 div#general-info {
-    grid-column-start: 1;
-    grid-column-end: 2;
     display: flex;
-    flex-direction: column;
     gap: 2rem;
-}
-/* Reocordar utilizar clases para cada tipo de gradient */
-
-div#money-chart {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    /* Depende del tamaño de la gráfica */
-    height: 400px;
-    padding: 1.5rem;
-    background-color: #fff;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-div#total {
-    display: grid;
-    grid-template-columns: 2;
-    padding: 1.5rem;
-    background-color: #fff;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-div#total h3 {
-    grid-column-start: 1;
-    grid-column-end: 2;
 }
 
 div#total p {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    text-align: right;
-    margin: 0;
-    font-size: 2.4rem;
+    text-align: center;
+    margin: 1rem 0 0;
+    font-size: 2.5rem;
     font-weight: 600;
-}
+} 
 
-div#top-categories {
+div#top-categories, div#total  {
     display: flex;
     flex-direction: column;
+    flex: 2;
     gap: 1.5rem;
     padding: 1.5rem;
     background-color: #fff;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+div#total  {
+    flex: 1.3;
 }
 
 div#categories-container {
@@ -334,6 +310,10 @@ div#floating-button .fa-plus{
         font-size: 1.5rem;
     }
 
+    span#total-span {
+        font-size: 2rem;
+    }
+
     p.card-title {
         font-size: 1rem;
     }
@@ -351,20 +331,18 @@ div#floating-button .fa-plus{
     div#recent-records {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
-
-    div#overview-container {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-
     div#general-info {
-        grid-column-start: 1;
-        grid-column-end: 2;
+        flex-direction: column;
     }
     
-    div#money-chart {
-        grid-column-start: 1;
-        grid-column-end: 2;
+    div#top-categories, div#total  {
+        flex: auto;
     }
+
+    div#total p {
+        margin: 0 auto 1rem;
+        font-size: 2.3rem;
+    } 
 }
 
 @media only screen and (max-width: 420px) {
@@ -402,6 +380,10 @@ div#floating-button .fa-plus{
     }
 
     div#total p {
+        font-size: 2rem;
+    }
+
+    span#total-span {
         font-size: 2rem;
     }
 

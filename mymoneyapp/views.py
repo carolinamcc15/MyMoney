@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -55,6 +55,7 @@ def add_account(request):
 
         new_account = Account(
             username =request.user, 
+
             #Gets the selected category
             acc_type = AccountType.objects.get(acc_type = acc_type), 
             name = request.POST['account-name'], 
@@ -111,22 +112,22 @@ def add_record(request):
         selected_account = Account.objects.get(name = account)
         balance = selected_account.current_balance
 
-        if float(quantity) > float(balance) and is_income:
+        if float(quantity) > float(balance) and is_income == 'False':
             return render(request, 'message.html', {
                 "message": "El dinero en la cuenta no alcanza"
             })
-        
-        new_record = Record(
-            username =request.user, 
-            account = selected_account,
-            category = Category.objects.get(category = category),
-            is_income = is_income,
-            quantity = quantity, 
-            date = datetime.datetime.now().strftime("%Y-%m-%d"),
-            update_datetime = datetime.datetime.now(),
-            description = request.POST['description']
-        )
-        new_record .save()
+        else:
+            new_record = Record(
+                username =request.user, 
+                account = selected_account,
+                category = Category.objects.get(category = category),
+                is_income = is_income,
+                quantity = quantity, 
+                date = datetime.datetime.now().strftime("%Y-%m-%d"),
+                update_datetime = datetime.datetime.now(),
+                description = request.POST['description']
+            )
+            new_record .save()
 
         if is_income == 'False':
             selected_account.current_balance = float(balance) - float(quantity)
@@ -180,10 +181,14 @@ def edit_record(request, id):
         return HttpResponseRedirect(reverse("general"))
 
     elif request.method == "POST" and "delete-record" in request.POST:
-        # if current_record.is_income:
-        #     current_record.account.current_balance = current_record.account.current_balance - float(quantity)
-        # else:
-        #     current_record.account.current_balance = current_record.account.current_balance + float(quantity)
+        account = Account.objects.get(id = current_record.account.id)
+
+        if current_record.is_income:
+            account.current_balance = float(account.current_balance) - float(current_record.quantity)
+        else:
+            account.current_balance = float(account.current_balance) + float(current_record.quantity)
+
+        account.save()
 
         Record.objects.filter(id = id).delete()
 
@@ -197,6 +202,11 @@ def edit_record(request, id):
 
 
 def sign_up(request):
+    username = ""
+    email = ""
+    password = ""
+    confirm = ""
+
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -210,7 +220,7 @@ def sign_up(request):
 
         # Regex validation
         email_pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
-        username_pattern = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+        username_pattern = "^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"
         password_pattern = "((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})"
         
         if not re.search(email_pattern, email):
@@ -226,7 +236,7 @@ def sign_up(request):
             password_msg = True
         
         if email_msg or username_msg or insecure_password or password_msg:
-            return render(request, 'sign-up.html', {
+            return redirect(request, 'sign-up.html', {
                 "username": username,
                 "email": email,
                 "username_msg": username_msg,
@@ -241,7 +251,7 @@ def sign_up(request):
             new_user.save()
                 
         except IntegrityError:
-            return render(request, 'sign-up.html', {
+            return redirect(request, 'sign-up.html', {
                 "username": username,
                 "email": email,
                 "username_msg": username_msg,
@@ -254,6 +264,7 @@ def sign_up(request):
         login(request, new_user)
 
         return HttpResponseRedirect(reverse("general"))
+
     else:
         return render(request, 'sign-up.html', {
                 "username": "",
