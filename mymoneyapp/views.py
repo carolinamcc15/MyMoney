@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -26,8 +26,6 @@ def index(request):
 
     return render(request, 'landing.html')
 
-
-@login_required
 def general(request):
     user = request.user
     accounts = Account.objects.filter(username = user)
@@ -46,7 +44,6 @@ def general(request):
         "top": top_categories,
         "norecords": "No se encontraron registros",
     })
-
 
 @login_required
 def add_account(request):
@@ -89,7 +86,6 @@ def add_account(request):
         "balance": ""
     })
     
-
 @login_required
 def account(request, id):
     current_account = Account.objects.get(id = id)
@@ -139,7 +135,6 @@ def account(request, id):
         "error": False,
     })
 
-
 @login_required
 def add_record(request):
     if request.method == "POST":
@@ -181,7 +176,6 @@ def add_record(request):
         "categories": Category.objects.all(),
         "accounts": Account.objects.filter(username = request.user)
     })
-
 
 @login_required
 def edit_record(request, id):
@@ -238,7 +232,6 @@ def edit_record(request, id):
         "categories": Category.objects.all(),
         "accounts": Account.objects.filter(username = request.user)
     })
-
 
 def sign_up(request):
     username = ""
@@ -315,7 +308,6 @@ def sign_up(request):
                 "insecure_password": False
             })
 
-
 def log_in(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -336,7 +328,6 @@ def log_in(request):
             "failed": False,
             "username": ""
         })
-
 
 @login_required
 def logout_view(request):

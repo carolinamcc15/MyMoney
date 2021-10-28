@@ -47,7 +47,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'csp.middleware.CSPMiddleware',
 ]
+
+# CSP_DEFAULT_SRC = ("'none'", )
+# CSP_STYLE_SRC = ("'self'",)
+# CSP_SCRIPT_SRC = ("'self'", )
+# CSP_IMG_SRC = ("'self'", )
+# CSP_FONT_SRC = ("'self'", 'https://use.fontawesome.com', 'https://fonts.googleapis.com')
 
 # Aditional security
 SECURE_BROWSER_XSS_FILTER = True
