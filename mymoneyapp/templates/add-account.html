@@ -14,11 +14,11 @@
             {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-font"></i>
-                <input type="text" name="account-name" placeholder="Nombre" required />
+                <input type="text" name="account-name" value="{{ name }}" placeholder="Nombre" maxlenght="20" required />
             </div>
             <div class="icon-input">
                 <i class="fas fa-dollar-sign"></i>
-                <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00" required />
+                <input type="number" name="balance" value="{{ balance }}" placeholder="Saldo actual ($)" step="0.01" min="0" required />
             </div>
             <div class="icon-input">
                 <i class="fas fa-list"></i>
@@ -28,6 +28,9 @@
                 {% endfor %}
                 </select>
             </div>
+            {% if error %}
+                <p class="input-message">Algunos campos no son válidos</p>
+            {% endif %}
             <button type="submit" form="add-account">Crear cuenta</button>
         </form>
     </section>

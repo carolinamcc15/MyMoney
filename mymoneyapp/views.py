@@ -51,22 +51,42 @@ def general(request):
 @login_required
 def add_account(request):
     if request.method == "POST":
-        acc_type =  request.POST['account-type']
+        changed_value = False
 
-        new_account = Account(
+        try:
+            acc_type =  request.POST['account-type']
+            name = request.POST['account-name']
+            balance = request.POST['balance']
+            acc_type = AccountType.objects.get(acc_type = acc_type)
+        except:
+            changed_value = True
+
+        if (len(name) > 0 and len(name) <= 20 and name != "") and (float(balance) >= 0 and balance != None) and not changed_value:
+            new_account = Account(
             username =request.user, 
-
             #Gets the selected category
-            acc_type = AccountType.objects.get(acc_type = acc_type), 
-            name = request.POST['account-name'], 
-            initial_balance = request.POST['balance'], 
-            current_balance = request.POST['balance'])
+            acc_type = acc_type, 
+            name = name, 
+            initial_balance = balance, 
+            current_balance = balance)
 
-        new_account .save()
-        return HttpResponseRedirect(reverse("general"))
+            new_account .save()
+
+            return HttpResponseRedirect(reverse("general"))
+
+        else:
+            return render(request, 'add-account.html', {
+                "types": AccountType.objects.all(),
+                "error": True,
+                "name": name,
+                "balance": balance
+            })
 
     return render(request, 'add-account.html', {
-        "types": AccountType.objects.all()
+        "types": AccountType.objects.all(),
+        "error": False,
+        "name": "",
+        "balance": ""
     })
     
 

@@ -232,6 +232,17 @@ p.date {
     font-weight: 400;
 }
 
+
+p.input-message {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: right;
+
+    color: rgb(168, 0, 0);
+
+    margin: 0;
+}
+
 footer {
     display: none;
 }

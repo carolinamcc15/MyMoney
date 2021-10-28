@@ -32,6 +32,9 @@
                     {% endfor %}
                     </select>
                 </div>
+                {% if error %}
+                    <p class="input-message">Algunos campos no son válidos</p>
+                {% endif %}
                 <div id="buttons-container">
                     <button type="submit" id="delete" name="delete-account" form="edit-account">Eliminar</button>
                     <button type="submit" name="edit-account" form="edit-account">Guardar</button>
