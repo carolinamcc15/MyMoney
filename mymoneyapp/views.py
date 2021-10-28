@@ -96,17 +96,35 @@ def account(request, id):
     records = Record.objects.filter(account = current_account).order_by('-update_datetime')
     
     if request.method == "POST" and "edit-account" in request.POST:
-        acc_type =  str.strip(request.POST['account-type'])
+        changed_value = False
 
-        Account.objects.filter(id = id).update(
-            username =request.user, 
+        try:
+            acc_type =  request.POST['account-type']
+            name = request.POST['account-name']
+            balance = request.POST['balance']
+            acc_type = AccountType.objects.get(acc_type = acc_type)
+        except:
+            changed_value = True
+
+        if (len(name) > 0 and len(name) <= 20 and name != "") and (float(balance) >= 0 and balance != None) and not changed_value:
+            Account.objects.filter(id = id).update(
+            username = request.user, 
             acc_type = AccountType.objects.get(acc_type = acc_type), 
-            name = request.POST['account-name'], 
-            initial_balance = request.POST['balance'], 
-            current_balance = request.POST['balance']
+            name = name,
+            initial_balance = balance, 
+            current_balance = balance,
             )
 
-        return HttpResponseRedirect(reverse("general"))
+            return HttpResponseRedirect(reverse("general"))
+        
+        else:
+            return render(request, 'account.html', {
+            "account": current_account,
+            "types": AccountType.objects.all(),
+            "records": records,
+            "norecords": "No se encontraron registros",
+            "error": True,
+            })
 
     elif request.method == "POST" and "delete-account" in request.POST:
         Account.objects.filter(id = id).delete()
@@ -117,7 +135,8 @@ def account(request, id):
         "account": current_account,
         "types": AccountType.objects.all(),
         "records": records,
-        "norecords": "No se encontraron registros"
+        "norecords": "No se encontraron registros",
+        "error": False,
     })
 
 
