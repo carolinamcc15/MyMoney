@@ -1,0 +1,95 @@
+h2 {
+    margin: 0 auto 0.5rem;
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.icon-input {
+    display: flex;
+    width: 100%;
+    max-width: 650px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+
+    transition: ease-in-out all 0.2s;
+}
+
+div.icon-input i {
+    margin-right: 0.8rem;
+    font-size: 1.3rem;
+    color: var(--secondary)
+}
+
+input {
+    width: 80%;
+    padding: 0.8rem;
+    border: none;
+    border-bottom: solid gray 1px;
+}
+
+input:focus {
+    outline: none;
+}
+
+div#password:focus-within ~ p.informative {
+    display: block;
+}
+
+button {
+    padding: 0.8rem 2rem;
+    margin-top: 2.5rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    background-color: var(--secondary);
+    color: #fff;
+    font-weight: 600;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+p.input-message {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: right;
+
+    color: rgb(168, 0, 0);
+
+    margin: 0.7rem 0 0;
+
+    width: 70%;
+    max-width: 600px;
+}
+
+p.informative {
+    color: rgb(0, 0, 153);
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    button {
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+    }
+
+    div.icon-input i {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+}

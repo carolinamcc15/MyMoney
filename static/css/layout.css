@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: rgb(153, 183, 238);
+    --secondary: rgb(8, 2, 92);
+    --background: rgb(255, 253, 247);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+}
+
+* {
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#header-content {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    height: 85px;
+}
+
+#header-info {
+    width: 100%;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+#header-options {
+    height: 85px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 2rem;
+    align-items: center;
+}
+
+#header-options > a, #header-options > a:visited {
+    color: #fff;
+}
+
+#header-options > a#sign-up {
+    background-color: transparent;
+    color: var(--secondary);
+}
+
+#header-options > a#sign-up:visited {
+    color: var(--secondary);
+}
+
+
+i.fa-power-off {
+    font-size: 1.5rem;
+}
+
+i.fa-power-off:hover {
+    font-size: 1.6rem;
+}
+
+h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: inline;
+    margin: 0;
+    color: #fff;
+}
+
+#header-logo {
+    height: 50px;
+}
+
+#header-logo > img {
+    height: inherit;
+    padding-right: 1rem;
+}
+
+a.button {
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 0.8rem;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+a.button:hover {
+    cursor: pointer;
+}
+
+/* Hovers pendientes (mejor al tener los colores) */
+#sign-up {
+    background-color: #fff;
+    color: var(--secondary);
+    border: solid 2px var(--secondary);
+}
+
+#log-in {
+    background-color: var(--secondary);
+    border: solid 2px var(--secondary);
+    color: #fff;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--secondary);
+    padding: 1.3rem;
+}
+
+small {
+    font-size: 1rem;
+    color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        grid-template-columns: 2;
+        grid-template-rows: 2;
+        position: relative;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    i.fa-power-off {
+        font-size: 1.3rem;
+    }
+    
+    i.fa-power-off:hover {
+        font-size: 1.4rem;
+    }
+
+    #header-logo {
+        height: 40px;
+    }
+
+    #sign-up {
+        background-color: var(--background);
+    }
+}
