@@ -102,7 +102,7 @@ def account(request, id):
         except:
             changed_value = True
 
-        if (len(name) > 0 and len(name) <= 20 and name != "") and (float(balance) >= 0 and balance != None) and not changed_value:
+        if (len(name) > 0 and len(name) <= 20 and name != None) and (float(balance) >= 0 and balance != None) and not changed_value:
             Account.objects.filter(id = id).update(
             username = request.user, 
             acc_type = AccountType.objects.get(acc_type = acc_type), 
@@ -138,13 +138,17 @@ def account(request, id):
 @login_required
 def add_record(request):
     if request.method == "POST":
-        category =  request.POST['category']
-        account = request.POST['account']
-        is_income = request.POST.get("is-income", None)
-        quantity = request.POST['quantity']
+        selectChanged = False
 
-        selected_account = Account.objects.get(name = account)
-        balance = selected_account.current_balance
+        try:
+            category =  request.POST['category']
+            account = request.POST['account']
+            is_income = request.POST.get("is-income", None)
+            quantity = request.POST['quantity']
+            selected_account = Account.objects.get(name = account)
+            balance = selected_account.current_balance
+        except:
+            selectChanged = True
 
         if float(quantity) > float(balance) and is_income == 'False':
             return render(request, 'message.html', {
@@ -268,7 +272,7 @@ def sign_up(request):
             password_msg = True
         
         if email_msg or username_msg or insecure_password or password_msg:
-            return redirect(request, 'sign-up.html', {
+            return render(request, 'sign-up.html', {
                 "username": username,
                 "email": email,
                 "username_msg": username_msg,
@@ -283,7 +287,7 @@ def sign_up(request):
             new_user.save()
                 
         except IntegrityError:
-            return redirect(request, 'sign-up.html', {
+            return render(request, 'sign-up.html', {
                 "username": username,
                 "email": email,
                 "username_msg": username_msg,
