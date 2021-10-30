@@ -9,9 +9,9 @@
         <h2>¡Crea una cuenta!</h2>
         <form id="sign-up" method="POST" name="sign-up" action="{% url 'sign-up' %}">
             {% csrf_token %}
-            <div class="icon-input">
+            <div class="icon-input" tabindex="0">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" value="{{ username }}" placeholder="Nombre de usuario" required />
+                <input id="username" type="text" name="username" value="{{ username }}" placeholder="Nombre de usuario" required />
             </div>
             {% if username_msg %}
                 <p class="input-message">Nombre de usuario no válido</p>
@@ -19,6 +19,10 @@
             {% if taken %}
                 <p class="input-message">El nombre de usuario ya existe</p>
             {% endif %}
+            <p class="input-message informative hidden">
+                    Permitido: letras, números y guión bajo
+            </p>
+
             <div class="icon-input">
                 <i class="fas fa-envelope"></i>
                 <input type="email" name="email"  value="{{ email }}"  placeholder="Correo electrónico" required />
@@ -26,6 +30,7 @@
             {% if email_msg %}
                 <p class="input-message">Correo electrónico no válido</p>
             {% endif %}
+
             <div class="icon-input" id="password">
                 <i class="fas fa-lock"></i>
                 <input type="password" name="password" placeholder="Contraseña" required />
@@ -38,6 +43,7 @@
                 </br>
                 <strong>Al menos</strong> una minúscula, una mayúscula, un dígito y un símbolo
             </p>
+
             <div class="icon-input">
                 <i class="fas fa-lock"></i>
                 <input type="password" name="confirm-password" placeholder="Confirmar contraseña" required />

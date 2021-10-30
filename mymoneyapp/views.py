@@ -90,22 +90,22 @@ def add_account(request):
 def account(request, id):
     current_account = Account.objects.get(id = id)
     records = Record.objects.filter(account = current_account).order_by('-update_datetime')
+    changedValue = False
     
     if request.method == "POST" and "edit-account" in request.POST:
-        changed_value = False
 
         try:
-            acc_type =  request.POST['account-type']
+            acc_type =  str.strip(request.POST['account-type'])
             name = request.POST['account-name']
             balance = request.POST['balance']
             acc_type = AccountType.objects.get(acc_type = acc_type)
         except:
-            changed_value = True
+            changedValue = True
 
-        if (len(name) > 0 and len(name) <= 20 and name != None) and (float(balance) >= 0 and balance != None) and not changed_value:
+        if (len(name) > 0 and len(name) <= 20 and name != None) and (float(balance) >= 0 and balance != None) and not changedValue:
             Account.objects.filter(id = id).update(
             username = request.user, 
-            acc_type = AccountType.objects.get(acc_type = acc_type), 
+            acc_type = acc_type, 
             name = name,
             initial_balance = balance, 
             current_balance = balance,
@@ -256,7 +256,7 @@ def sign_up(request):
 
         # Regex validation
         email_pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
-        username_pattern = "^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+        username_pattern = "^[a-z0-9_].*?$"
         password_pattern = "((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})"
         
         if not re.search(email_pattern, email):

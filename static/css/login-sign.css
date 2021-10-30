@@ -42,6 +42,10 @@ div#password:focus-within ~ p.informative {
     display: block;
 }
 
+div#username:focus-within ~ p.informative {
+    display: block;
+}
+
 button {
     padding: 0.8rem 2rem;
     margin-top: 2.5rem;
