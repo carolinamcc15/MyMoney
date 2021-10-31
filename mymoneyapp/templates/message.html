@@ -1,10 +1,23 @@
-{% extends 'user-layout.html' %}
 {% load static %}
 
-{% block style %}
-    <link href="{% static 'css/login-sign.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block body %}
-        <h2>{{ message }}</h2>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/not-found.css' %}" rel="stylesheet">
+    <title>Error</title>
+</head>
+<body>
+    <main>
+        <h1>:(</h1>
+        {% if message != "" %}
+            <h2>{{ message }}</h2>
+        {% else %}
+            <h2>Ocurrió un error al realizar la operación</h2>
+        {% endif %}
+        <a class="button" href="{% url 'index' %}">Página principal</a>
+    </main>
+</body>
+</html>

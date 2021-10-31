@@ -35,3 +35,21 @@ main {
     justify-content: center;
     align-items: center;
 }
+
+a.button {
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    text-decoration: none;
+
+    color: rgb(8, 2, 92);
+
+    transition: ease-in-out all 0.3s;
+}
+
+a.button:hover {
+    cursor: pointer;
+
+    border-bottom: solid 2px rgb(8, 2, 92);
+}

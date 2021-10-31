@@ -58,6 +58,7 @@ def add_account(request):
             acc_type = AccountType.objects.get(acc_type = acc_type)
         except:
             changed_value = True
+            return render(request, 'message.html')
 
         if (len(name) > 0 and len(name) <= 20 and name != "") and (float(balance) >= 0 and balance != None) and not changed_value:
             new_account = Account(
@@ -108,6 +109,7 @@ def account(request, id):
             acc_type = AccountType.objects.get(acc_type = acc_type)
         except:
             changedValue = True
+            return render(request, 'message.html')
 
         if (len(name) > 0 and len(name) <= 20 and name != None) and (float(balance) >= 0 and balance != None) and not changedValue:
             Account.objects.filter(id = id).update(
@@ -161,6 +163,7 @@ def add_record(request):
             balance = selected_account.current_balance
         except:
             selectChanged = True
+            return render(request, 'message.html')
 
         if float(quantity) > float(balance) and is_income == 'False':
             return render(request, 'message.html', {
@@ -256,10 +259,13 @@ def sign_up(request):
     confirm = ""
 
     if request.method == 'POST':
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm = request.POST['confirm-password']
+        try:
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            confirm = request.POST['confirm-password']
+        except:
+            return render(request, 'message.html')
 
         email_msg = False
         username_msg = False
@@ -333,9 +339,12 @@ def sign_up(request):
 
 def log_in(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        blank_fields = False
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+        except:
+            blank_fields = False
+            return render(request, 'message.html')
 
         if username != "" and password != "":
             user = authenticate(request, username = username, password = password)
