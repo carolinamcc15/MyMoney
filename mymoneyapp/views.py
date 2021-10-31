@@ -49,6 +49,7 @@ def general(request):
 def add_account(request):
     if request.method == "POST":
         changed_value = False
+        blank = False
 
         try:
             acc_type =  request.POST['account-type']
@@ -72,18 +73,23 @@ def add_account(request):
             return HttpResponseRedirect(reverse("general"))
 
         else:
+            if name == "" or balance == "" or acc_type == "":
+                blank = True
+            
             return render(request, 'add-account.html', {
                 "types": AccountType.objects.all(),
                 "error": True,
                 "name": name,
-                "balance": balance
+                "balance": balance, 
+                "blank": blank
             })
 
     return render(request, 'add-account.html', {
         "types": AccountType.objects.all(),
         "error": False,
         "name": "",
-        "balance": ""
+        "balance": "",
+        "blank": False
     })
     
 @login_required
@@ -91,6 +97,7 @@ def account(request, id):
     current_account = Account.objects.get(id = id)
     records = Record.objects.filter(account = current_account).order_by('-update_datetime')
     changedValue = False
+    blank = False
     
     if request.method == "POST" and "edit-account" in request.POST:
 
@@ -114,12 +121,16 @@ def account(request, id):
             return HttpResponseRedirect(reverse("general"))
         
         else:
+            if name == "" or balance == "" or acc_type == "":
+                blank = True
+
             return render(request, 'account.html', {
             "account": current_account,
             "types": AccountType.objects.all(),
             "records": records,
             "norecords": "No se encontraron registros",
             "error": True,
+            "blank": blank
             })
 
     elif request.method == "POST" and "delete-account" in request.POST:
@@ -133,6 +144,7 @@ def account(request, id):
         "records": records,
         "norecords": "No se encontraron registros",
         "error": False,
+        "blank": False
     })
 
 @login_required

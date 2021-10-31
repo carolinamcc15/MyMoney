@@ -63,6 +63,9 @@
                 <button type="submit" id="delete" name="delete-record" form="edit-record">Eliminar</button>
                 <button type="submit" name="edit-record" form="edit-record">Guardar</button>
             </div>
+            {% if blank %}
+                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+            {% endif %}
         </form>
     </section>
 </main>

@@ -35,6 +35,9 @@
                 {% if error %}
                     <p class="input-message">Asegúrate de que los campos sean válidos</p>
                 {% endif %}
+                {% if blank %}
+                    <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+                {% endif %}
                 <div id="buttons-container">
                     <button type="submit" id="delete" name="delete-account" form="edit-account">Eliminar</button>
                     <button type="submit" name="edit-account" form="edit-account">Guardar</button>

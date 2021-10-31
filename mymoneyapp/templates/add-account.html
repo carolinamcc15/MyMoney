@@ -31,6 +31,9 @@
             {% if error %}
                 <p class="input-message">Algunos campos no son válidos</p>
             {% endif %}
+            {% if blank %}
+                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+            {% endif %}
             <button type="submit" form="add-account">Crear cuenta</button>
         </form>
     </section>
