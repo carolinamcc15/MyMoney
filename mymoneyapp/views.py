@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
@@ -253,10 +253,6 @@ def sign_up(request):
         username_msg = False
         password_msg = False
         insecure_password = False
-        blank_filed = False
-
-        if username == "" or email == "" or password == "" or confirm == "":
-            blank_field = True
 
         # Regex validation
         email_pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
@@ -274,7 +270,7 @@ def sign_up(request):
 
         if password != confirm:
             password_msg = True
-
+        
         if email_msg or username_msg or insecure_password or password_msg:
             return render(request, 'sign-up.html', {
                 "username": username,
@@ -283,8 +279,7 @@ def sign_up(request):
                 "taken": False,
                 "email_msg": email_msg,
                 "password_msg": password_msg,
-                "insecure_password": insecure_password,
-                "blank": blank_field
+                "insecure_password": insecure_password
             })
 
         try:
@@ -299,8 +294,7 @@ def sign_up(request):
                 "taken": True,
                 "email_msg": email_msg,
                 "password_msg": password_msg,
-                "insecure_password": insecure_password,
-                "blank": blank_field
+                "insecure_password": insecure_password
             })
 
         login(request, new_user)
@@ -315,41 +309,28 @@ def sign_up(request):
                 "taken": False,
                 "email_msg": False,
                 "password_msg": False,
-                "insecure_password": False,
-                "blank": False
+                "insecure_password": False
             })
 
 def log_in(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        blank_fields = False
 
-        if username != "" and password != "":
-            user = authenticate(request, username = username, password = password)
-        else:
-            blank_fields = True
-            return render(request, 'login.html', {
-                            "failed": True,
-                            "username": username,
-                            "blank": blank_fields
-                        })
+        user = authenticate(request, username = username, password = password)
 
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("general"))
         else:
             return render(request, 'login.html', {
-                            "failed": True,
-                            "username": username,
-                            "blank": blank_fields
-                        })
-
+                "failed": True,
+                "username": username
+            })
     else:
         return render(request, 'login.html', {
             "failed": False,
-            "username": "",
-            "blank": False
+            "username": ""
         })
 
 @login_required
