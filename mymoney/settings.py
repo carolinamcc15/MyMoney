@@ -25,12 +25,14 @@ SECRET_KEY = 'django-insecure-nh@etjqmbq$rae6uk-2me-nqpb1*0*ux*gcqkf84r$@g5#)jh^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.33']
+#ALLOWED_HOSTS = ['192.168.1.33']
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
     'mymoneyapp',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,6 +117,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Django-rest-framework
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.UserRateThrottle',
+
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'loginAttempts': '5/hr',
+        'user': '1000/min',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
