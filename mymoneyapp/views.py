@@ -313,8 +313,8 @@ def sign_up(request):
             blank_field = True
 
         # Regex validation
-        email_pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
-        username_pattern = "^[a-z0-9_].*?$"
+        email_pattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+        username_pattern = "^[a-zA-Z0-9_-]*$"
         password_pattern = "((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})"
         
         if not re.search(email_pattern, email):
