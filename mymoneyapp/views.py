@@ -152,106 +152,124 @@ def account(request, id):
 @login_required
 def add_record(request):
     if request.method == "POST":
-        select_changed = False
+        selectChanged = False
         not_enough = False
-        blank = False
+        error = False
 
         try:
-            category =  str.strip(request.POST['category'])
-            category = Category.objects.get(category = category)
-            account = str.strip(request.POST['account'])
-            selected_account = Account.objects.get(name = account)
+            category =  request.POST['category']
+            account = request.POST['account']
             is_income = request.POST.get("is-income", None)
-            quantity = str.strip(request.POST['quantity'])
+            quantity = request.POST['quantity']
+            description = request.POST['description']
+            user = request.user
+
+            category = Category.objects.get(category = category)
+            selected_account = Account.objects.get(name = account, username = user)
             balance = selected_account.current_balance
-            description = str.strip(request.POST['description'])
+
             float(quantity)
 
         except:
-            select_changed = True
+            selectChanged = True
             return render(request, 'message.html')
 
-        if float(quantity) > float(balance) and is_income == 'False':
-            not_enough = True
+        if float(quantity) < 0 or (float(quantity) > float(balance) and is_income == 'False'):
+            if float(quantity) > float(balance) and is_income == 'False':
+                not_enough = True
 
-        if balance == "":
-            blank = True
+            if float(quantity) < 0:
+                error = True
 
-        if not blank and (float(balance) >= 0 and balance != None) and not select_changed and not not_enough:
+            return render(request, 'add-record.html', {
+                "categories": Category.objects.all(),
+                "accounts": Account.objects.filter(username = request.user),
+                "not_enough": not_enough,
+                "error": error
+            })
+
+        else:
             new_record = Record(
-                username = request.user, 
+                username =request.user, 
                 account = selected_account,
                 category = category,
                 is_income = is_income,
                 quantity = quantity, 
                 date = datetime.datetime.now().strftime("%Y-%m-%d"),
                 update_datetime = datetime.datetime.now(),
-                description = description,
+                description = description
             )
-
             new_record .save()
 
-            if is_income == 'False':
-                selected_account.current_balance = float(balance) - float(quantity)
-            else:
-                selected_account.current_balance = float(balance) + float(quantity)
-
-            selected_account.save()
-
-            return HttpResponseRedirect(reverse("general"))
-
+        if is_income == 'False':
+            selected_account.current_balance = float(balance) - float(quantity)
         else:
-            return render(request, 'add-record.html', {
-                "categories": Category.objects.all(),
-                "accounts": Account.objects.filter(username = request.user),
-                "not_enough": not_enough,
-                "blank": blank,
-                "error": True
-            })
+            selected_account.current_balance = float(balance) + float(quantity)
+        selected_account.save()
+        return HttpResponseRedirect(reverse("general"))
 
     return render(request, 'add-record.html', {
         "categories": Category.objects.all(),
         "accounts": Account.objects.filter(username = request.user),
-        "not_enough": False,
-        "blank": False,
+        "not_enough": False, 
         "error": False
     })
+
 
 @login_required
 def edit_record(request, id):
     current_record = Record.objects.get(id = id)
 
     if request.method == "POST" and "edit-record" in request.POST:
-        category =  str.strip(request.POST['category'])
-        account =  str.strip(request.POST['account'])
-        is_income = request.POST.get("is-income", None)
-        quantity = request.POST['quantity']
-
-        selected_account = Account.objects.get(name = account)
-        balance = float(selected_account.current_balance)
-
-        if float(quantity) > float(balance) and is_income == 'False':
-            return render(request, 'message.html', {
-                "message": "El dinero en la cuenta no alcanza"
-            })
-
-        Record.objects.filter(id = id).update(
-            username =request.user, 
-            account = selected_account,
-            category = Category.objects.get(category = category),
-            is_income = is_income,
-            quantity = request.POST['quantity'],
+        try:
+            category =  request.POST['category']
+            account = request.POST['account']
+            is_income = request.POST.get("is-income", None)
+            quantity = request.POST['quantity']
             description = request.POST['description']
-            )
+            user = request.user
 
-        if is_income == 'False':
-            selected_account.current_balance = balance - float(quantity)
+            category = Category.objects.get(category = category)
+            selected_account = Account.objects.get(name = account, username = user)
+            balance = selected_account.current_balance
+
+            float(quantity)
+
+        except:
+            selectChanged = True
+            return render(request, 'message.html')
+
+        if float(quantity) < 0 or (float(quantity) > float(balance) and is_income == 'False'):
+            if float(quantity) > float(balance) and is_income == 'False':
+                not_enough = True
+
+            if float(quantity) < 0:
+                error = True
+
+            return render(request, 'add-record.html', {
+                "categories": Category.objects.all(),
+                "accounts": Account.objects.filter(username = request.user),
+                "not_enough": not_enough,
+                "error": error
+            })
         else:
-            selected_account.current_balance = balance + float(quantity)
+            Record.objects.filter(id = id).update(
+                username = request.user, 
+                account = selected_account,
+                category = category,
+                is_income = is_income,
+                quantity = request.POST['quantity'],
+                description = description
+                )
 
-        selected_account.save()
+            if is_income == 'False':
+                selected_account.current_balance = balance - float(quantity)
+            else:
+                selected_account.current_balance = balance + float(quantity)
 
-        return HttpResponseRedirect(reverse("general"))
+            selected_account.save()
+
+            return HttpResponseRedirect(reverse("general"))
 
     elif request.method == "POST" and "delete-record" in request.POST:
         account = Account.objects.get(id = current_record.account.id)
@@ -270,7 +288,9 @@ def edit_record(request, id):
     return render(request, 'edit-record.html', {
         "record": current_record,
         "categories": Category.objects.all(),
-        "accounts": Account.objects.filter(username = request.user)
+        "accounts": Account.objects.filter(username = request.user),
+        "not_enough": False, 
+        "error": False
     })
 
 def sign_up(request):

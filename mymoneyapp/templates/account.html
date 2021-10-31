@@ -18,25 +18,26 @@
                 </div>
                 <div class="icon-input">
                     <i class="fas fa-dollar-sign"></i>
-                    <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00" value="{{ account.current_balance }}"required />
+                    <input type="number" name="balance" placeholder="Saldo actual ($)" step="0.01" min="0.00"
+                        value="{{ account.current_balance }}" required />
                 </div>
                 <div class="icon-input">
                     <i class="fas fa-list"></i>
-                    <select name="account-type" id="account-type" required >
-                    {% for type in types %}
+                    <select name="account-type" id="account-type" required>
+                        {% for type in types %}
                         {% if account.acc_type.acc_type == type.acc_type %}
-                            <option value="{{  type.acc_type }} " selected> {{  type.acc_type }} </option>
+                        <option value="{{  type.acc_type }} " selected> {{ type.acc_type }} </option>
                         {% else %}
-                            <option value="{{  type.acc_type }} "> {{  type.acc_type }} </option>
+                        <option value="{{  type.acc_type }} "> {{ type.acc_type }} </option>
                         {% endif %}
-                    {% endfor %}
+                        {% endfor %}
                     </select>
                 </div>
                 {% if error %}
-                    <p class="input-message">Asegúrate de que los campos sean válidos</p>
+                <p class="input-message">Asegúrate de que los campos sean válidos</p>
                 {% endif %}
                 {% if blank %}
-                    <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
                 {% endif %}
                 <div id="buttons-container">
                     <button type="submit" id="delete" name="delete-account" form="edit-account">Eliminar</button>
@@ -46,72 +47,72 @@
         </section>
 
         <section id="recent">
-        <h2>Registros</h2>
+            <h2>Registros</h2>
 
-        {% if records|length == 0 %}
+            {% if records|length == 0 %}
             <p class="empty"> {{ norecords }}</p>
 
-        {% else %}
-        <div id="recent-records">
-        {% for record in records %}
-            <a href="{% url 'edit-record' record.id %}">
-                <div class="record-card">
-                {% if record.category.id == 1 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/fast-food.png' %}" alt="Hamburguesa y bebida" />
-                    </div>
-                {% elif record.category.id == 2 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/shopping.png' %}" alt="Bolsas de compras" />
-                    </div>
-                {% elif record.category.id == 3 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/house.png' %}" alt="Casa blanca" />
-                    </div>
-                {% elif record.category.id == 4 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/car.png' %}" alt="Vehículo color aqua" />
-                    </div>
-                {% elif record.category.id == 5 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/entertainment.png' %}" alt="Caja de sorpresas" />
-                    </div>
-                {% elif record.category.id == 6 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/message.png' %}" alt="Celular con mensaje" />
-                    </div>
-                {% elif record.category.id == 7 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/income.png' %}" alt="Monedas color oro" />
-                    </div>
-                {% elif record.category.id == 8 %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/stonks.png' %}" alt="Inversiones" />
-                    </div>
-                {% else %}
-                    <div class="record-img">
-                        <img src="{% static 'images/categories/others.png' %}" alt="Otras opciones" />
-                    </div>
-                {% endif %}
+            {% else %}
+            <div id="recent-records">
+                {% for record in records %}
+                <a href="{% url 'edit-record' record.id %}">
+                    <div class="record-card">
+                        {% if record.category.id == 1 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/fast-food.png' %}" alt="Hamburguesa y bebida" />
+                        </div>
+                        {% elif record.category.id == 2 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/shopping.png' %}" alt="Bolsas de compras" />
+                        </div>
+                        {% elif record.category.id == 3 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/house.png' %}" alt="Casa blanca" />
+                        </div>
+                        {% elif record.category.id == 4 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/car.png' %}" alt="Vehículo color aqua" />
+                        </div>
+                        {% elif record.category.id == 5 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/entertainment.png' %}" alt="Caja de sorpresas" />
+                        </div>
+                        {% elif record.category.id == 6 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/message.png' %}" alt="Celular con mensaje" />
+                        </div>
+                        {% elif record.category.id == 7 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/income.png' %}" alt="Monedas color oro" />
+                        </div>
+                        {% elif record.category.id == 8 %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/stonks.png' %}" alt="Inversiones" />
+                        </div>
+                        {% else %}
+                        <div class="record-img">
+                            <img src="{% static 'images/categories/others.png' %}" alt="Otras opciones" />
+                        </div>
+                        {% endif %}
 
 
-                    <div class="category-record">
-                        <p>{{ record.category.category }}</p>
+                        <div class="category-record">
+                            <p>{{ record.category.category }}</p>
+                        </div>
+                        <div class="quant-date">
+                            {% if record.is_income %}
+                            <p class="plus">+{{ record.quantity }}</p>
+                            {% else %}
+                            <p class="minus">-{{ record.quantity }}</p>
+                            {% endif %}
+                            <p class="date">{{ record.date }}</p>
+                        </div>
                     </div>
-                    <div class="quant-date">
-                    {% if record.is_income %}
-                        <p class="plus">+{{ record.quantity }}</p>
-                    {% else %}
-                        <p class="minus">-{{ record.quantity }}</p>
-                    {% endif %}
-                        <p class="date">{{ record.date }}</p>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-        </div>
-        {% endif %}
-    </section>
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </section>
     </div>
     <a href="{% url 'add-record' %}">
         <div id="floating-button">
@@ -119,4 +120,5 @@
         </div>
     </a>
 </main>
+<p id="warning"><i class="fas fa-exclamation-triangle"></i>Al eliminar la cuenta, se eliminarán todos sus registros.</p>
 {% endblock %}

@@ -59,13 +59,19 @@
                 <i class="fas fa-font"></i>
                 <input type="text" name="description" value="{{ record.description }}" placeholder="Descripción" />
             </div>
+            {% if error %}
+            <p class="input-message">Asegúrate de que los campos sean válidos</p>
+            {% endif %}
+            {% if not_enough %}
+                <p class="input-message">El dinero en la cuenta es insuficiente</p>
+            {% endif %}
+            {% if blank %}
+                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+            {% endif %}
             <div id="buttons-container">
                 <button type="submit" id="delete" name="delete-record" form="edit-record">Eliminar</button>
                 <button type="submit" name="edit-record" form="edit-record">Guardar</button>
             </div>
-            {% if blank %}
-                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
-            {% endif %}
         </form>
     </section>
 </main>

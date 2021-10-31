@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary: rgb(153, 183, 238);
+    --primary: rgb(136, 170, 233);
 }
 
 * {
@@ -38,18 +38,25 @@ main {
 
 a.button {
     border: none;
+    margin-top: 1rem;
     font-size: 1rem;
-    font-weight: 600;
-    padding: 0.5rem 0;
+    font-weight: 700;
+    padding: 0.8rem 0.8rem;
+    border-radius: 20px;
     text-decoration: none;
+    background-color: rgb(8, 2, 92);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
-    color: rgb(8, 2, 92);
+    color: white;
 
-    transition: ease-in-out all 0.3s;
+    transition: ease-in-out all 0.2s;
 }
 
 a.button:hover {
     cursor: pointer;
+    background-color: rgb(59, 53, 145);
+}
 
-    border-bottom: solid 2px rgb(8, 2, 92);
+p {
+    text-align: center;
 }
