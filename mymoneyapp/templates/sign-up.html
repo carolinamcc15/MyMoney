@@ -52,5 +52,8 @@
                 <p class="input-message">Las contraseñas no coinciden</p>
             {% endif %}
             <button type="submit" form="sign-up">Crear cuenta</button>
+            {% if blank %}
+                <p class="input-message" style="font-weight: 600;">* Se detectaron campos vacíos</p>
+            {% endif %}
         </form>
 {% endblock %}
