@@ -12,11 +12,7 @@
 <body>
     <main>
         <h1>:(</h1>
-        {% if message != "" %}
-            <h2>{{ message }}</h2>
-        {% else %}
-            <h2>Ocurrió un error al realizar la operación</h2>
-        {% endif %}
+        <h2>Ocurrió un error al realizar la operación</h2>
         <a class="button" href="{% url 'index' %}">Página principal</a>
     </main>
 </body>

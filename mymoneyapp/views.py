@@ -56,6 +56,7 @@ def add_account(request):
             name = request.POST['account-name']
             balance = request.POST['balance']
             acc_type = AccountType.objects.get(acc_type = acc_type)
+            float(balance)
         except:
             changed_value = True
             return render(request, 'message.html')
@@ -63,7 +64,6 @@ def add_account(request):
         if (len(name) > 0 and len(name) <= 20 and name != "") and (float(balance) >= 0 and balance != None) and not changed_value:
             new_account = Account(
             username =request.user, 
-            #Gets the selected category
             acc_type = acc_type, 
             name = name, 
             initial_balance = balance, 
@@ -101,12 +101,12 @@ def account(request, id):
     blank = False
     
     if request.method == "POST" and "edit-account" in request.POST:
-
         try:
             acc_type =  str.strip(request.POST['account-type'])
-            name = request.POST['account-name']
-            balance = request.POST['balance']
+            name = str.strip(request.POST['account-name'])
+            balance = str.strip(request.POST['balance'])
             acc_type = AccountType.objects.get(acc_type = acc_type)
+            float(balance)
         except:
             changedValue = True
             return render(request, 'message.html')
@@ -152,48 +152,69 @@ def account(request, id):
 @login_required
 def add_record(request):
     if request.method == "POST":
-        selectChanged = False
+        select_changed = False
+        not_enough = False
+        blank = False
 
         try:
-            category =  request.POST['category']
-            account = request.POST['account']
-            is_income = request.POST.get("is-income", None)
-            quantity = request.POST['quantity']
+            category =  str.strip(request.POST['category'])
+            category = Category.objects.get(category = category)
+            account = str.strip(request.POST['account'])
             selected_account = Account.objects.get(name = account)
+            is_income = request.POST.get("is-income", None)
+            quantity = str.strip(request.POST['quantity'])
             balance = selected_account.current_balance
+            description = str.strip(request.POST['description'])
+            float(quantity)
+
         except:
-            selectChanged = True
+            select_changed = True
             return render(request, 'message.html')
 
         if float(quantity) > float(balance) and is_income == 'False':
-            return render(request, 'message.html', {
-                "message": "El dinero en la cuenta no alcanza"
-            })
-        else:
+            not_enough = True
+
+        if balance == "":
+            blank = True
+
+        if not blank and (float(balance) >= 0 and balance != None) and not select_changed and not not_enough:
             new_record = Record(
-                username =request.user, 
+                username = request.user, 
                 account = selected_account,
-                category = Category.objects.get(category = category),
+                category = category,
                 is_income = is_income,
                 quantity = quantity, 
                 date = datetime.datetime.now().strftime("%Y-%m-%d"),
                 update_datetime = datetime.datetime.now(),
-                description = request.POST['description']
+                description = description,
             )
+
             new_record .save()
 
-        if is_income == 'False':
-            selected_account.current_balance = float(balance) - float(quantity)
+            if is_income == 'False':
+                selected_account.current_balance = float(balance) - float(quantity)
+            else:
+                selected_account.current_balance = float(balance) + float(quantity)
+
+            selected_account.save()
+
+            return HttpResponseRedirect(reverse("general"))
+
         else:
-            selected_account.current_balance = float(balance) + float(quantity)
-
-        selected_account.save()
-
-        return HttpResponseRedirect(reverse("general"))
+            return render(request, 'add-record.html', {
+                "categories": Category.objects.all(),
+                "accounts": Account.objects.filter(username = request.user),
+                "not_enough": not_enough,
+                "blank": blank,
+                "error": True
+            })
 
     return render(request, 'add-record.html', {
         "categories": Category.objects.all(),
-        "accounts": Account.objects.filter(username = request.user)
+        "accounts": Account.objects.filter(username = request.user),
+        "not_enough": False,
+        "blank": False,
+        "error": False
     })
 
 @login_required
@@ -253,17 +274,12 @@ def edit_record(request, id):
     })
 
 def sign_up(request):
-    username = ""
-    email = ""
-    password = ""
-    confirm = ""
-
     if request.method == 'POST':
         try:
-            username = request.POST['username']
-            email = request.POST['email']
-            password = request.POST['password']
-            confirm = request.POST['confirm-password']
+            username = str.strip(request.POST['username'])
+            email = str.strip(request.POST['email'])
+            password = str.strip(request.POST['password'])
+            confirm = str.strip(request.POST['confirm-password'])
         except:
             return render(request, 'message.html')
 
@@ -271,7 +287,7 @@ def sign_up(request):
         username_msg = False
         password_msg = False
         insecure_password = False
-        blank_filed = False
+        blank_field = False
 
         if username == "" or email == "" or password == "" or confirm == "":
             blank_field = True
@@ -340,8 +356,8 @@ def sign_up(request):
 def log_in(request):
     if request.method == "POST":
         try:
-            username = request.POST['username']
-            password = request.POST['password']
+            username = str.strip(request.POST['username'])
+            password = str.strip(request.POST['password'])
         except:
             blank_fields = False
             return render(request, 'message.html')
@@ -363,7 +379,7 @@ def log_in(request):
             return render(request, 'login.html', {
                             "failed": True,
                             "username": username,
-                            "blank": blank_fields
+                            "blank": False
                         })
 
     else:

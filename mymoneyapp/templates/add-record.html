@@ -46,8 +46,17 @@
             </div>
             <div class="icon-input">
                 <i class="fas fa-font"></i>
-                <input type="text" name="description" placeholder="Concepto" maxlength="50"/>
+                <input type="text" name="description" placeholder="Concepto (opcional)" maxlength="50"/>
             </div>
+            {% if error %}
+            <p class="input-message">Asegúrate de que los campos sean válidos</p>
+            {% endif %}
+            {% if not_enough %}
+                <p class="input-message">El dinero en la cuenta es insuficiente</p>
+            {% endif %}
+            {% if blank %}
+                <p class="input-message" style="font-weight: 600; margin-top: 1rem;">* Se detectaron campos vacíos</p>
+            {% endif %}
             <button type="submit" form="add-record">Añadir registro</button>
         </form>
         {% endif %}
