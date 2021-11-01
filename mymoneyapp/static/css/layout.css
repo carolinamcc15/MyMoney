@@ -54,6 +54,13 @@ header {
 #header-options > a#sign-up {
     background-color: transparent;
     color: var(--secondary);
+    border: solid 2px var(--secondary);
+}
+
+#header-options > a#sign-up:hover, #header-options > a#sign-up:focus {
+    background-color: rgb(228, 232, 240);
+    color: var(--secondary);
+    border: solid 2px var(--secondary);
 }
 
 #header-options > a#sign-up:visited {
@@ -93,22 +100,26 @@ a.button {
     padding: 0.5rem 0.8rem;
     border-radius: 15px;
     text-decoration: none;
+
+    transition: all ease-in-out 0.2s;
 }
 
 a.button:hover {
     cursor: pointer;
+
+    transform: scale(1.02);
 }
 
 /* Hovers pendientes (mejor al tener los colores) */
-#sign-up {
-    background-color: #fff;
-    color: var(--secondary);
-    border: solid 2px var(--secondary);
-}
-
 #log-in {
     background-color: var(--secondary);
     border: solid 2px var(--secondary);
+    color: #fff;
+}
+
+#log-in:hover, #sign-up:focus {
+    background-color: rgb(72, 65, 167);
+    border: solid 2px rgb(72, 65, 167);
     color: #fff;
 }
 

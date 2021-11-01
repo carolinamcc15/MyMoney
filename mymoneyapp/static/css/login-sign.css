@@ -55,6 +55,9 @@ button {
 
 button:hover {
     cursor: pointer;
+
+    background-color: rgb(72, 65, 167);
+    color: #fff;
 }
 
 p.input-message {

@@ -11,14 +11,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
     {% block style %}
     {% endblock %}
-    <!-- To do {% block title %}{% endblock %} -->
     <title>My Money</title>
 </head>
 
 <body>
     <div id="background">
         <header>
-            <h1>My Money</h1>
+            <a href="{% url 'index' %}" id="header-logo">
+                <img src="{% static 'images/logo.png' %}" alt="My Money App" />
+                <h1>My Money</h1>
+            </a>
         </header>
     <main>
         {% block body %}

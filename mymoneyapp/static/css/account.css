@@ -175,14 +175,21 @@ button {
     font-weight: 600;
 }
 
-button:hover {
+button:hover, button#delete:focus {
     cursor: pointer;
+
+    background-color: rgb(72, 65, 167);
+    color: #fff;
 }
 
 button#delete {
     border: 2px solid rgb(199, 1, 1);
     background-color: transparent;
     color: rgb(199, 1, 1);
+}
+
+button#delete:hover, button#delete:focus {
+    background-color: rgb(255, 239, 239);
 }
 
 div#recent-records {
