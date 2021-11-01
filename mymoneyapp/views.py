@@ -25,7 +25,8 @@ def index(request):
         return HttpResponseRedirect(reverse("general"))
 
     return render(request, 'landing.html')
-
+    
+@login_required
 def general(request):
     user = request.user
     accounts = Account.objects.filter(username = user)
