@@ -376,6 +376,7 @@ def sign_up(request):
             })
 
 def log_in(request):
+    banned = False
     if request.method == "POST":
         try:
             username = str.strip(request.POST['username'])
@@ -383,6 +384,9 @@ def log_in(request):
         except:
             blank_fields = False
             return render(request, 'message.html')
+
+        if User.objects.filter(username = username).exists():
+                curr_user = User.objects.get(username = username)
 
         if username != "" and password != "":
             user = authenticate(request, username = username, password = password)
@@ -395,20 +399,64 @@ def log_in(request):
                         })
 
         if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("general"))
+            if user.banned_until is None:
+                login(request, user)
+                User.objects.filter(username = username).update(
+                    login_attempts = 0
+                )
+                return HttpResponseRedirect(reverse("general"))
+
+            #Si ya pasaron los 15 minutos
+            elif user.banned_until < datetime.datetime.now():
+                User.objects.filter(username = username).update(
+                        login_attempts = 0,
+                        banned_until = None
+                )
+
+                login(request, user)
+
+                return HttpResponseRedirect(reverse("general"))
+            #Si no han pasado los 15 minutos
+            else:
+                return render(request, 'login.html', {
+                    "failed": False,
+                    "username": "",
+                    "blank": False,
+                    "submit": "disabled" if banned else "",
+                    "banned": banned
+                })
+
         else:
+            #Comprobar si el usuario se encuentra en la bd
+            if User.objects.filter(username = username).exists():
+                curr_user = User.objects.get(username = username)
+
+                if curr_user.login_attempts < 5:
+                    User.objects.filter(username = username).update(
+                        login_attempts = curr_user.login_attempts + 1,
+                        banned_until = None
+                    )
+                else:
+                    User.objects.filter(username = username).update(
+                        banned_until = datetime.datetime.now() + datetime.timedelta(minutes = 15)
+                    )
+                    banned = True
+
             return render(request, 'login.html', {
-                            "failed": True,
-                            "username": username,
-                            "blank": False
-                        })
+                "failed": True,
+                "username": username,
+                "blank": False,
+                "submit": "disabled" if banned else "",
+                "banned": banned
+            })
 
     else:
         return render(request, 'login.html', {
             "failed": False,
             "username": "",
-            "blank": False
+            "blank": False,
+            "submit": "disabled" if banned else "",
+            "banned": banned
         })
 
 @login_required

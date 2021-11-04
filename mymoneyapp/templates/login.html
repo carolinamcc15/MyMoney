@@ -17,10 +17,13 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" name="password" placeholder="Contraseña" required/>
             </div>
-            {% if failed and not blank %}
+            {% if failed and not blank and not banned %}
                 <p class="input-message">Nombre de usuario o contraseña incorrectos</p>
             {% endif %}
-            <button type="submit" form="login">Ingresar</button>
+            {% if banned %}
+            <p class="input-message" style="font-weight: 600;">Tus peticiones han sido bloqueadas</p>
+            {% endif %}
+            <button type="submit" form="login" {{ submit }}>Ingresar</button>
             {% if blank %}
                 <p class="input-message" style="font-weight: 600;">* Se detectaron campos vacíos</p>
             {% endif %}
