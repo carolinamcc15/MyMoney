@@ -5,6 +5,10 @@
 <link href="{% static 'css/general.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block username %}
+{{ user.username }}
+{% endblock %}
+
 {% block body %}
 <main>
     <section id="accounts">

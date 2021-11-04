@@ -44,6 +44,7 @@ def general(request):
         "recent_records": recent_records,
         "top": top_categories,
         "norecords": "No se encontraron registros",
+        "user": user
     })
 
 @login_required
