@@ -42,6 +42,27 @@ a:visited {
     color: #000;
 }
 
+a.admin {
+    border: none;
+    border-radius: 15px;
+
+    padding: 0.5rem 0.7rem;
+    margin-left: 2rem;
+    
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 600;
+
+    background-color: var(--secondary);
+}
+
+a.admin:hover {
+    cursor: pointer;
+
+    background-color: rgb(72, 65, 167);
+    color: #fff;
+}
+
 div#accounts-scroll {
     display: flex;
     overflow-x: auto;

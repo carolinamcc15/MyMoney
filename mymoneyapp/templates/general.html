@@ -10,6 +10,12 @@
 {% endblock %}
 
 {% block body %}
+
+{% if user.is_staff %}
+<div style="height: 23px;"></div>
+<a class="admin" href="{% url 'admin:index' %}">Ir a sitio de admin</a>
+{% endif %}
+
 <main>
     <section id="accounts">
         <h2>Mis cuentas</h2>
