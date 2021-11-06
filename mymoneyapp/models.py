@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    pass
+    login_attempts = models.IntegerField(default=0, blank=False)
+    banned_until = models.DateTimeField(default=None, blank=True, null=True)
+    last_attempt = models.DateTimeField(default=None, blank=True, null=True)
 
 class Category(models.Model):
     id = models.IntegerField(primary_key=True, blank=False, null=False, unique=True)

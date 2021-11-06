@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block branding %}
+    {% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    {% endblock %}
+
+    <h1 = 'head'>
+    <img src="{% static 'images/logo.png' %}" alt="MyMoney" class="brand_img">
+    MyMoney admin site
+    </h1>
+
+{% endblock %}
