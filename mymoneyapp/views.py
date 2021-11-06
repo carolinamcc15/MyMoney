@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -155,7 +155,6 @@ def account(request, id):
 @login_required
 def add_record(request):
     if request.method == "POST":
-        selectChanged = False
         not_enough = False
         error = False
 
@@ -174,7 +173,6 @@ def add_record(request):
             float(quantity)
 
         except:
-            selectChanged = True
             return render(request, 'message.html')
 
         if float(quantity) < 0 or (float(quantity) > float(balance) and is_income == 'False'):
@@ -239,7 +237,6 @@ def edit_record(request, id):
             float(quantity)
 
         except:
-            selectChanged = True
             return render(request, 'message.html')
 
         if float(quantity) < 0 or (float(quantity) > float(balance) and is_income == 'False'):
@@ -378,7 +375,7 @@ def sign_up(request):
 
 def log_in(request):
     banned = False
-    remaining = ""
+    minutes = ""
     if request.method == "POST":
         try:
             username = str.strip(request.POST['username'])
@@ -397,7 +394,7 @@ def log_in(request):
                             "blank": blank_fields,
                             "submit": "disabled" if banned else "",
                             "banned": banned,
-                            "remaining": remaining if banned else ""
+                            "remaining": minutes if banned else ""
             })
 
         if user is not None:
@@ -424,6 +421,7 @@ def log_in(request):
 
                 if user.banned_until is not None:
                     remaining = user.banned_until - make_aware(datetime.datetime.now())
+                    minutes = (remaining.seconds % 3600) // 60
 
                 return render(request, 'login.html', {
                     "failed": False,
@@ -431,14 +429,26 @@ def log_in(request):
                     "blank": False,
                     "submit": "disabled" if banned else "",
                     "banned": banned,
-                    "remaining": remaining if banned else ""
+                    "remaining": minutes if banned else ""
                 })
 
         else:
             #Comprobar si el usuario se encuentra en la bd
             if User.objects.filter(username = username).exists():
                 curr_user = User.objects.get(username = username)
+                last_attempt = curr_user.last_attempt
 
+                if last_attempt is not None:
+                    diff = make_aware(datetime.datetime.now()) - last_attempt
+
+                    # Si el usuario no intenta ingresar en más de 15 minutos, se reinician los intentos
+                    if diff >= datetime.timedelta(minutes=15) and curr_user.banned_until is None:
+                        User.objects.filter(username = username).update(
+                                login_attempts = 0,
+                                banned_until = None
+                        )
+                        curr_user.login_attempts = 0;
+                        
                 if curr_user.login_attempts < 5 and curr_user.banned_until is None:
                     User.objects.filter(username = username).update(
                         login_attempts = curr_user.login_attempts + 1,
@@ -461,6 +471,11 @@ def log_in(request):
                 elif curr_user.banned_until is not None and curr_user.banned_until > make_aware(datetime.datetime.now()):
                     banned = True
                     remaining = curr_user.banned_until - make_aware(datetime.datetime.now())
+                    minutes = (remaining.seconds % 3600) // 60
+
+                User.objects.filter(username = username).update(
+                        last_attempt = datetime.datetime.now()
+                    )
 
                 return render(request, 'login.html', {
                     "failed": True,
@@ -468,7 +483,7 @@ def log_in(request):
                     "blank": False,
                     "submit": "disabled" if banned else "",
                     "banned": banned,
-                    "remaining": remaining if banned else ""
+                    "remaining": minutes if banned else ""
                 })
 
             return render(request, 'login.html', {
@@ -477,7 +492,7 @@ def log_in(request):
                 "blank": False,
                 "submit": "disabled" if banned else "",
                 "banned": banned,
-                "remaining": remaining if banned else ""
+                "remaining": minutes if banned else ""
             })
 
     else:
@@ -487,7 +502,7 @@ def log_in(request):
             "blank": False,
             "submit": "disabled" if banned else "",
             "banned": banned,
-            "remaining": remaining if banned else ""
+            "remaining": minutes if banned else ""
         })
 
 @login_required
