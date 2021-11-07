@@ -27,6 +27,10 @@
             </div>
             {% if user.is_authenticated %}
             <div id="header-options">
+                <p>
+                    {% block username %}
+                    {% endblock %}
+                </p>
                 <a href="{% url 'logout' %}">
                     <i class="fas fa-power-off"></i>
                 </a>

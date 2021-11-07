@@ -47,6 +47,12 @@ header {
     align-items: center;
 }
 
+#header-options p {
+    margin-right: 0.5rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
 #header-options > a, #header-options > a:visited {
     color: #fff;
 }
@@ -156,6 +162,10 @@ small {
 
     #header-logo {
         height: 40px;
+    }
+
+    #header-options p {
+        font-size: 1rem;
     }
 
     #sign-up {
