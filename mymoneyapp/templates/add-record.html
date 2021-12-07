@@ -16,7 +16,7 @@
                 <a class="button" href='{% url 'add-account' %}' id="log-in">Crear cuenta</a>
             </div>
         {% else %}
-        <form id="add-record" method="POST" name="add-record" action="">
+        <form autocomplete="off" id="add-record" method="POST" name="add-record" action="" autocomplete="off">
             {% csrf_token %}
             <div class="icon-input toggle">
                 <input type="radio" id="expense" value="False" name="is-income" checked="checked" required />

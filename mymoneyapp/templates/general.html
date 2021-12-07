@@ -12,7 +12,7 @@
 {% block body %}
 
 {% if user.is_staff %}
-<div style="height: 23px;"></div>
+<div id="admin-sep"></div>
 <a class="admin" href="{% url 'admin:index' %}">Ir a sitio de admin</a>
 {% endif %}
 

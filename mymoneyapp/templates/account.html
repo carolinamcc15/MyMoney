@@ -10,7 +10,7 @@
     <h2>{{ account.name }}</h2>
     <div>
         <section>
-            <form id="edit-account" method="POST" name="add-account" action="">
+            <form autocomplete="off" id="edit-account" method="POST" name="add-account" action="" autocomplete="off">
                 {% csrf_token %}
                 <div class="icon-input">
                     <i class="fas fa-font"></i>

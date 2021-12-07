@@ -223,8 +223,8 @@ def edit_record(request, id):
 
     if request.method == "POST" and "edit-record" in request.POST:
         try:
-            category =  request.POST['category']
-            account = request.POST['account']
+            category = str.strip(request.POST['category'])
+            account = str.strip(request.POST['account'])
             is_income = request.POST.get("is-income", None)
             quantity = request.POST['quantity']
             description = request.POST['description']
@@ -232,7 +232,7 @@ def edit_record(request, id):
 
             category = Category.objects.get(category = category)
             selected_account = Account.objects.get(name = account, username = user)
-            balance = selected_account.current_balance
+            balance = float(selected_account.current_balance)
 
             float(quantity)
 
@@ -254,7 +254,7 @@ def edit_record(request, id):
             })
         else:
             Record.objects.filter(id = id).update(
-                username = request.user, 
+                username = request.user,
                 account = selected_account,
                 category = category,
                 is_income = is_income,
@@ -262,10 +262,18 @@ def edit_record(request, id):
                 description = description
                 )
 
-            if is_income == 'False':
-                selected_account.current_balance = balance - float(quantity)
+            if is_income == 'False' and current_record.is_income == False:
+                selected_account.current_balance = (balance + float(current_record.quantity)) - float(quantity)
+            elif is_income == 'False' and current_record.is_income == True and float(current_record.quantity) != float(quantity):
+                selected_account.current_balance = (balance - float(current_record.quantity)) - float(quantity)
+            elif is_income == 'True' and current_record.is_income == True:
+                selected_account.current_balance = (balance - float(current_record.quantity)) + float(quantity)
+            elif is_income == 'True' and current_record.is_income == False and float(current_record.quantity) != float(quantity):
+                selected_account.current_balance = (balance + float(current_record.quantity)) + float(quantity)
+            elif is_income == 'False':
+                selected_account.current_balance = balance - 2 * float(quantity)
             else:
-                selected_account.current_balance = balance + float(quantity)
+                selected_account.current_balance = balance + 2 * float(quantity)
 
             selected_account.save()
 

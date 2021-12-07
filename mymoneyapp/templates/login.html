@@ -7,11 +7,11 @@
 
 {% block body %}
         <h2>Inicio de sesión</h2>
-        <form id="login" method="POST" name="login" action="{% url 'log-in' %}">
+        <form autocomplete="off" id="login" method="POST" name="login" action="{% url 'log-in' %}">
             {% csrf_token %}
             <div class="icon-input">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" value="{{ username }}" placeholder="Usuario" required/>
+                <input type="text" name="username" value="{{ username }}" placeholder="Usuario" autocomplete="off" required/>
             </div>
             <div class="icon-input">
                 <i class="fas fa-lock"></i>

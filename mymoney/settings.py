@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nh@etjqmbq$rae6uk-2me-nqpb1*0*ux*gcqkf84r$@g5#)jh^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['192.168.1.11']
 
 # Application definition
 
@@ -48,18 +48,28 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'csp.middleware.CSPMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
-# CSP_DEFAULT_SRC = ("'none'", )
-# CSP_STYLE_SRC = ("'self'",)
-# CSP_SCRIPT_SRC = ("'self'", )
-# CSP_IMG_SRC = ("'self'", )
-# CSP_FONT_SRC = ("'self'", 'https://use.fontawesome.com', 'https://fonts.googleapis.com')
+
+CSP_DEFAULT_SRC = ("'self'", )
+CSP_STYLE_SRC = ("'self'","fonts.googleapis.com","use.fontawesome.com")
+CSP_IMG_SRC = ("'self'",)
+CSP_FONT_SRC = ("'self'","fonts.gstatic.com","use.fontawesome.com")
+CSP_OBJECT_SRC = ("'self'", )
+CSP_BASE_URI = ("'self'", )
+CSP_FRAME_ANCESTORS = ("'self'", )
+CSP_FORM_ACTION = ("'self'", )
+CSP_SCRIPT_SRC = ("'self'","use.fontawesome.com","kit.fontawesome.com")
+CSP_INCLUDE_NONCE_IN = ('script-src', )
+CSP_MANIFEST_SRC = ("'self'", )
+CSP_WORKER_SRC = ("'self'", )
+CSP_MEDIA_SRC = ("'self'", )
 
 # Aditional security
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_COOKIE_HTTPONLY = True
 
 ROOT_URLCONF = 'mymoney.urls'
 
@@ -115,18 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Django-rest-framework
-REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.UserRateThrottle',
-
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'loginAttempts': '5/hr',
-        'user': '1000/min',
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

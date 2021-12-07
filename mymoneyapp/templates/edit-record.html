@@ -10,7 +10,7 @@
     <h2>Editar registro</h2>
     <section>
         <img src="{% static 'images/add-record.svg' %}" alt="Nueva cuenta de dinero" />
-        <form id="edit-record" method="POST" name="edit-record" action="">
+        <form autocomplete="off" id="edit-record" method="POST" name="edit-record" action="" autocomplete="off">
             {% csrf_token %}
             <div class="icon-input toggle">
 

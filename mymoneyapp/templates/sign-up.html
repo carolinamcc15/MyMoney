@@ -7,7 +7,7 @@
 
 {% block body %}
         <h2>¡Crea una cuenta!</h2>
-        <form id="sign-up" method="POST" name="sign-up" action="{% url 'sign-up' %}">
+        <form autocomplete="off"  id="sign-up" method="POST" name="sign-up" action="{% url 'sign-up' %}" autocomplete="off">
             {% csrf_token %}
             <div class="icon-input" tabindex="0">
                 <i class="fas fa-user"></i>

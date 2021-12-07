@@ -42,6 +42,10 @@ a:visited {
     color: #000;
 }
 
+div#admin-sep {
+    height: 35px;
+}
+
 a.admin {
     border: none;
     border-radius: 15px;
